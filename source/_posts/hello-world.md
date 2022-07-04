@@ -9,7 +9,7 @@ tags:
 博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。
 同时本文也兼顾写一些我在博客部署时遇到的一些问题。
 
-## 从 hexo 到 GitHub Pages 的一些
+## hexo 部署到 GitHub Pages 的一些问题
 
 首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。
 [hexo 的官方部署教程](https://hexo.io/docs/github-pages)
