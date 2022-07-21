@@ -4,7 +4,7 @@ date: 2022-07-04 14:32:19
 tags:
 ---
 
-## hello world
+## 简介
 
 博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。
 同时本文也兼顾写一些我在博客部署时遇到的一些问题。
@@ -35,3 +35,14 @@ on:
 {% asset_img workflows.jpg 工作流失败和成功的图片 %}
 
 这时候就可以去访问 username.github.io 就可以看到自己的博客了。
+
+## hexo 的一些常用操作
+
+``` shell
+# 本地启动
+hexo server
+# 新建一个草稿
+hexo new draft "title"
+# 发布一个草稿
+hexo publish "title"
+```
