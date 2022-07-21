@@ -1,7 +1,11 @@
 ---
 title: 为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识
-tags: [Git, Git Branching]
+tags:
+  - Git
+  - Git Branching
+date: 2022-07-21 20:45:01
 ---
+
 
 ## 起源
 
