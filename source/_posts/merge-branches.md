@@ -37,7 +37,7 @@ date: 2022-07-21 20:45:01
 
 到这一步就会发现，他复制的代码相较于远程分支是较为落后的，在 commit 中影响了其他人的文件，这自然会在同步的时候发生冲突。因为他使用的是 vsc 的源代码管理工具，所以看到了下面的内容：
 
-{% asset_img vsc-merge-conflict.png vsc 合并冲突的右键选项 %}
+{% asset_img vsc-merge-conflict.png vsc_合并冲突的右键选项 %}
 
 在这里，当前内容指的是本地的改动，而传入版本是远程的改动，这一操作导致了最后问题的产生。
 
@@ -47,7 +47,7 @@ date: 2022-07-21 20:45:01
 
 首先是借用其他人的 Git 用户信息这个，使得我在查看 commit 日志中遇到了很大的困难，一开始以为是不是谁配置的工作流导致的问题。同时，在查看记录时，发现了类似下面的情况：
 
-{% commit-merge-branch.jpg commit 触发的分支合并 %}
+{% commit-merge-branch.jpg commit_触发的分支合并 %}
 
 即，我明明只是利用 vsc 的分支管理工具，执行了 git pull 和 git push 命令，为什么导致在没有编辑同一文件内容的情况下产生了分支合并。根据 Pro Git 上的[描述](https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF#%E6%8B%89%E5%8F%96:~:text=%E7%84%B6%E8%80%8C%EF%BC%8C%E6%9C%89%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E5%8F%AB%E4%BD%9C%20git%20pull%20%E5%9C%A8%E5%A4%A7%E5%A4%9A%E6%95%B0%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%83%E7%9A%84%E5%90%AB%E4%B9%89%E6%98%AF%E4%B8%80%E4%B8%AA%20git%20fetch%20%E7%B4%A7%E6%8E%A5%E7%9D%80%E4%B8%80%E4%B8%AA%20git%20merge%20%E5%91%BD%E4%BB%A4)， git pull 相当于 git fetch 和 git merge 的组合，也正因为这个特点，导致了大量 merge 行为的产生。同时，功能的开发的提交在主分支上，不建立分支，也不和主分支保持同步也是导致这次事故产生的原因。相比较而言，vsc 的分支管理工具的略含误导的描述，反而显得并不那么重要了。
 
