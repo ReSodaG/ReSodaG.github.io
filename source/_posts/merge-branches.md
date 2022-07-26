@@ -69,6 +69,12 @@ date: 2022-07-21 20:45:01
 
 也推荐看一下我后续写的关于如何使用 Git 的博客和 Git 的测试项目。
 
+## 补充内容
+
+今天看到了知乎上套路的一个问题，和这个博客也是蛮相关的，特此推荐看一下。
+
+[在开发过程中使用 git rebase 还是 git merge，优缺点分别是什么？](https://www.zhihu.com/question/36509119)
+
 ## 参考内容
 
 * [Pro Git](https://git-scm.com/book/zh/v2)
