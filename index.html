@@ -73,8 +73,8 @@
   
     <article id="post-how-to-use-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/07/21/how-to-use-git/" class="article-date">
-  <time class="dt-published" datetime="2022-07-21T13:10:56.906Z" itemprop="datePublished">2022-07-21</time>
+    <a href="/2022/08/11/how-to-use-git/" class="article-date">
+  <time class="dt-published" datetime="2022-08-11T07:31:36.640Z" itemprop="datePublished">2022-08-11</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/07/21/how-to-use-git/">how to use git</a>
+      <a class="p-name article-title" href="/2022/08/11/how-to-use-git/">how to use git</a>
     </h1>
   
 
@@ -124,10 +124,74 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/21/how-to-use-git/" data-id="cl5v1xw0l0000plof11k4akv8" data-title="how to use git" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/11/how-to-use-git/" data-id="cl6oq2cu70000bkoyh2dcfhmq" data-title="how to use git" class="article-share-link">Teilen</a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Web-Storage" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/08/11/Web-Storage/" class="article-date">
+  <time class="dt-published" datetime="2022-08-11T01:55:45.000Z" itemprop="datePublished">2022-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/08/11/Web-Storage/">Web Storage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="两种-Web-Storage"><a href="#两种-Web-Storage" class="headerlink" title="两种 Web Storage"></a>两种 Web Storage</h2><p>Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。</p>
+<p>时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏览器关闭，再重新打开数据仍然存在。</p>
+<p>空间上，sessionStorage 只在当前页面会话中存在，并不能跨标签；而 localStorage 只要在同一域名下，是跨浏览器窗口的。</p>
+<h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><p>主要解释关于页面会话的问题，localStorage 并不需要更多的解释。</p>
+<p>属于同一个页面会话：</p>
+<ol>
+<li><p>重新加载：刷新页面。</p>
+</li>
+<li><p>恢复页面：恢复关闭的页面（如，chrome 的重新打开关闭的标签页功能），即便关闭这个页面后又打开了新的页面，只要是恢复这个行为，就还是上一个页面会话。</p>
+</li>
+</ol>
+<p>不属于同一个页面会话的情况：</p>
+<ol>
+<li><p>新的页面也就有新的页面会话：复制链接重新打开等行为并不算同一个页面会话，即“打开多个相同的 URL 的 Tabs 页面，会创建各自的 sessionStorage”。</p>
+</li>
+<li><p>关闭浏览器才清理：关闭对应浏览器标签或窗口，会清除对应的 sessionStorage。</p>
+</li>
+</ol>
+<p>注意，存储在 sessionStorage 或 localStorage 中的数据特定于页面的协议。也就是说 <a target="_blank" rel="noopener" href="http://example.com/">http://example.com</a> 与 <a target="_blank" rel="noopener" href="https://example.com/">https://example.com</a> 的 sessionStorage 和 localStorage 相互隔离。各浏览器支持的 localStorage 和 sessionStorage 容量上限不同。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API">Web Storage API</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage">Window.sessionStorage</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage">Window.localStorage</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl6oq2cuc0001bkoy11j6hqq4" data-title="Web Storage" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Front-end/" rel="tag">Front-end</a></li></ul>
+
     </footer>
   </div>
   
@@ -191,6 +255,8 @@
 <p>当然，对于多人在同一个分支开发的情况，我比较建议使用 <code>git pull --rebase</code> 这个命令来获取其他开发者的更新内容。因为如果是默认的 <code>git pull</code> 将会造成分支的合并，而根据<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">测试</a>的情况，会产生一个 merge 的提交，使得生成了一个所有和远程分支有不同内容的你的内容的快照。大量的 merge 信息会影响对项目提交历史的追踪。</p>
 <p>当然，这些只是由于我先前的经历导致的对 Git 的一些操作感受，如果说能够很好的做好分支和合并操作，同时每个 Git 的使用者也能去避免不必要的冲突的产生和妥善处理冲突的产生。那么直接使用 <code>git pull</code> 所产生的合并快照也可以很形象的告诉开发者，每次新开发的功能的合并位置。</p>
 <p>也推荐看一下我后续写的关于如何使用 Git 的博客和 Git 的测试项目。</p>
+<h2 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h2><p>今天看到了知乎上套路的一个问题，和这个博客也是蛮相关的，特此推荐看一下。</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/36509119">在开发过程中使用 git rebase 还是 git merge，优缺点分别是什么？</a></p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
 <li><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching 小游戏</a></li>
@@ -199,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl5v1xw0t0002plof9k64f8s5" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl6oq2cuh0004bkoy08cq1r3z" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
       
       
       
@@ -235,7 +301,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
 <h2 id="hexo-部署到-GitHub-Pages-的一些问题"><a href="#hexo-部署到-GitHub-Pages-的一些问题" class="headerlink" title="hexo 部署到 GitHub Pages 的一些问题"></a>hexo 部署到 GitHub Pages 的一些问题</h2><p>首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。<br><a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">hexo 的官方部署教程</a><br>但是要提醒的是，主要要注意的是步骤二和步骤四。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span>  <span class="comment"># default branch</span></span><br></pre></td></tr></table></figure>
 
@@ -247,11 +313,12 @@
 <img src="/2022/07/04/hello-world/workflows.jpg" class="" title="工作流失败和成功的图片">
 
 <p>这时候就可以去访问 username.github.io 就可以看到自己的博客了。</p>
+<h2 id="hexo-的一些常用操作"><a href="#hexo-的一些常用操作" class="headerlink" title="hexo 的一些常用操作"></a>hexo 的一些常用操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">本地启动</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建一个草稿</span></span><br><span class="line">hexo new draft &quot;title&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发布一个草稿</span></span><br><span class="line">hexo publish &quot;title&quot;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl5v1xw0r0001plofctpvbn2o" data-title="hello world" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl6oq2cue0002bkoy9ujdbzpo" data-title="hello world" class="article-share-link">Teilen</a>
       
       
       
@@ -276,7 +343,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-Branching/" rel="tag">Git Branching</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/" rel="tag">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-Branching/" rel="tag">Git Branching</a></li></ul>
     </div>
   </div>
 
@@ -286,7 +353,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a>
+      <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a>
     </div>
   </div>
 
@@ -295,7 +362,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li></ul>
     </div>
   </div>
 
@@ -308,7 +375,11 @@
       <ul>
         
           <li>
-            <a href="/2022/07/21/how-to-use-git/">how to use git</a>
+            <a href="/2022/08/11/how-to-use-git/">how to use git</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/11/Web-Storage/">Web Storage</a>
           </li>
         
           <li>
