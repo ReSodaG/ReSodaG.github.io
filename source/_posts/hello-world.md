@@ -46,3 +46,7 @@ hexo new draft "title"
 # 发布一个草稿
 hexo publish "title"
 ```
+
+## 使用中的一些补充
+
+hexo 默认提供的 markdown 渲染器并不能提供所有的功能，比如上标功能就没有提供，所以我根据一个[链接](https://jovi.uxlib.net/add-superscript-subscript-footnote-and-other-functions-to-hexo.html/)中的内容进行了更改，现在可以支持上标功能了。
