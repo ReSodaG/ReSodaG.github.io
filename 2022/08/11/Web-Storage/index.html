@@ -6,15 +6,15 @@
   
   <title>Web Storage | Storh的打字台</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="两种 Web StorageWeb Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。 时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏览器">
+  <meta name="description" content="¶两种 Web Storage Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。 时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web Storage">
 <meta property="og:url" content="https://storh.github.io/2022/08/11/Web-Storage/">
 <meta property="og:site_name" content="Storh的打字台">
-<meta property="og:description" content="两种 Web StorageWeb Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。 时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏览器">
+<meta property="og:description" content="¶两种 Web Storage Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。 时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-11T01:55:45.000Z">
-<meta property="article:modified_time" content="2022-08-21T13:32:33.859Z">
+<meta property="article:modified_time" content="2022-08-21T14:21:55.597Z">
 <meta property="article:author" content="Storh">
 <meta property="article:tag" content="Front-end">
 <meta name="twitter:card" content="summary">
@@ -96,26 +96,33 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="两种-Web-Storage"><a href="#两种-Web-Storage" class="headerlink" title="两种 Web Storage"></a>两种 Web Storage</h2><p>Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。</p>
+        <h2 id="两种-Web-Storage"><a class="header-anchor" href="#两种-Web-Storage">¶</a>两种 Web Storage</h2>
+<p>Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。</p>
 <p>时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏览器关闭，再重新打开数据仍然存在。</p>
 <p>空间上，sessionStorage 只在当前页面会话中存在，并不能跨标签；而 localStorage 只要在同一域名下，是跨浏览器窗口的。</p>
-<h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><p>主要解释关于页面会话的问题，localStorage 并不需要更多的解释。</p>
+<h2 id="详细解释"><a class="header-anchor" href="#详细解释">¶</a>详细解释</h2>
+<p>主要解释关于页面会话的问题，localStorage 并不需要更多的解释。</p>
 <p>属于同一个页面会话：</p>
 <ol>
-<li><p>重新加载：刷新页面。</p>
+<li>
+<p>重新加载：刷新页面。</p>
 </li>
-<li><p>恢复页面：恢复关闭的页面（如，chrome 的重新打开关闭的标签页功能），即便关闭这个页面后又打开了新的页面，只要是恢复这个行为，就还是上一个页面会话。</p>
+<li>
+<p>恢复页面：恢复关闭的页面（如，chrome 的重新打开关闭的标签页功能），即便关闭这个页面后又打开了新的页面，只要是恢复这个行为，就还是上一个页面会话。</p>
 </li>
 </ol>
 <p>不属于同一个页面会话的情况：</p>
 <ol>
-<li><p>新的页面也就有新的页面会话：复制链接重新打开等行为并不算同一个页面会话，即“打开多个相同的 URL 的 Tabs 页面，会创建各自的 sessionStorage”。</p>
+<li>
+<p>新的页面也就有新的页面会话：复制链接重新打开等行为并不算同一个页面会话，即“打开多个相同的 URL 的 Tabs 页面，会创建各自的 sessionStorage”。</p>
 </li>
-<li><p>关闭浏览器才清理：关闭对应浏览器标签或窗口，会清除对应的 sessionStorage。</p>
+<li>
+<p>关闭浏览器才清理：关闭对应浏览器标签或窗口，会清除对应的 sessionStorage。</p>
 </li>
 </ol>
-<p>注意，存储在 sessionStorage 或 localStorage 中的数据特定于页面的协议。也就是说 <a target="_blank" rel="noopener" href="http://example.com/">http://example.com</a> 与 <a target="_blank" rel="noopener" href="https://example.com/">https://example.com</a> 的 sessionStorage 和 localStorage 相互隔离。各浏览器支持的 localStorage 和 sessionStorage 容量上限不同。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<p>注意，存储在 sessionStorage 或 localStorage 中的数据特定于页面的协议。也就是说 <a target="_blank" rel="noopener" href="http://example.com">http://example.com</a> 与 <a target="_blank" rel="noopener" href="https://example.com">https://example.com</a> 的 sessionStorage 和 localStorage 相互隔离。各浏览器支持的 localStorage 和 sessionStorage 容量上限不同。</p>
+<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API">Web Storage API</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage">Window.sessionStorage</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage">Window.localStorage</a></li>
@@ -124,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl73dd4jt0001b2ow1ew3ftgt" data-title="Web Storage" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl73f4hyq0001bjol43in514x" data-title="Web Storage" class="article-share-link">Teilen</a>
       
       
       

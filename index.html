@@ -74,7 +74,7 @@
     <article id="post-how-to-use-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/08/21/how-to-use-git/" class="article-date">
-  <time class="dt-published" datetime="2022-08-21T13:32:33.859Z" itemprop="datePublished">2022-08-21</time>
+  <time class="dt-published" datetime="2022-08-21T14:21:55.597Z" itemprop="datePublished">2022-08-21</time>
 </a>
     
   </div>
@@ -93,38 +93,42 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="如何使用-Git"><a href="#如何使用-Git" class="headerlink" title="如何使用 Git"></a>如何使用 Git</h2><p>关于如何使用 Git 我专门在一个<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example">测试项目</a>中进行了尝试，并保持了提交记录提交在 GitHub 上，这个项目的内容就是用来描述 Git 的命令和操作。为了方便测试分支和协作，我一共准备了3个用户来对项目进行修改，分别是我本人、 Alice 和 Bob。</p>
-<h3 id="新建分支"><a href="#新建分支" class="headerlink" title="新建分支"></a>新建分支</h3><p>新建分支参考 Pro Git 的<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6">这一章节</a>绝大多少情况下，我们都是从“当前”分支新建，只需要执行下面的命令就可以。</p>
+        <h2 id="如何使用-Git"><a class="header-anchor" href="#如何使用-Git">¶</a>如何使用 Git</h2>
+<p>关于如何使用 Git 我专门在一个<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example">测试项目</a>中进行了尝试，并保持了提交记录提交在 GitHub 上，这个项目的内容就是用来描述 Git 的命令和操作。为了方便测试分支和协作，我一共准备了3个用户来对项目进行修改，分别是我本人、 Alice 和 Bob。</p>
+<h3 id="新建分支"><a class="header-anchor" href="#新建分支">¶</a>新建分支</h3>
+<p>新建分支参考 Pro Git 的<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6">这一章节</a>绝大多少情况下，我们都是从“当前”分支新建，只需要执行下面的命令就可以。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b 新分支名</span><br></pre></td></tr></table></figure>
-
 <p>将会自动新建和移动到对应的分支上。这一操作可以在 <a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching</a> 小游戏基础篇的第二个关卡学习和实验。</p>
 <p>建立分支可以让开发的代码和过程和主分支隔离开，在分支上进行操作，直到适当的时候将修改内容合并上去，这样可以减少你修改的内容对其他开发者的影响。</p>
 <p>根据先前的故事来说，如果我和其他同事们，不同模块的代码开发在不同的分支上，那么他在使用从本地复制出来的项目代码进行（非常不推荐）提交和推送的时候，只要没有进行过分支合并，那么就不会影响其他人的代码从而导致冲突。</p>
-<h3 id="修改提交内容"><a href="#修改提交内容" class="headerlink" title="修改提交内容"></a>修改提交内容</h3><p>在提交（commit）内容中，commit 信息填写的有一些问题提交的代码内容也有一些需要更改（新增或编辑）的，这时候，就可以<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C">重新提交内容</a>。</p>
+<h3 id="修改提交内容"><a class="header-anchor" href="#修改提交内容">¶</a>修改提交内容</h3>
+<p>在提交（commit）内容中，commit 信息填写的有一些问题提交的代码内容也有一些需要更改（新增或编辑）的，这时候，就可以<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C">重新提交内容</a>。</p>
 <p>如上面的示例，首先需要先暂存缺少的内容，然后再执行 <code>git commit --amend</code>。这将会在终端中打开一个文件，<code>i</code> 可以对你的提交信息进行修改，<code>Esc : wq</code> 进行保存完成这次对提交内容的修改。</p>
 <p>需要注意的是，这个修改只能在还未推送到远程分支的情况下进行，这一行为也会改变提交的哈希。</p>
 <p>利用这个操作，可以有效的减少提交记录里那些小修小补的内容，使提交记录更加清晰明了。</p>
 <p>在<a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching</a> 小游戏的高级篇的第四关“撤销变更”可以尝试如何撤销提交，这里就不赘述，分别是下面两个命令：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD~1</span><br><span class="line">git revert HEAD</span><br></pre></td></tr></table></figure>
-
 <p>分别是撤销本地的一次提交和撤销远程的一次提交。</p>
-<h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">轻量标签</span></span><br><span class="line">git tag v0.0.2-d</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m &quot;tag 测试&quot;</span><br></pre></td></tr></table></figure>
-
+<h3 id="标签"><a class="header-anchor" href="#标签">¶</a>标签</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">轻量标签</span></span><br><span class="line">git tag v0.0.2-d</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">附注标签</span></span><br><span class="line">git tag -a v0.0.1 -m &quot;tag 测试&quot;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>其他命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">后期添加 tag，在最后加上提交的校验和</span></span><br><span class="line">git tag -a &lt;tag name&gt; &lt;hash&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传某个 tag</span></span><br><span class="line">git push origin &lt;tagname&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">上传所有 tag</span></span><br><span class="line">git push origin --tags</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除 tag</span></span><br><span class="line">git tag -d &lt;tagname&gt;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除远程 tag</span></span><br><span class="line">git push origin --delete &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>Git 支持两种标签：轻量标签（lightweight）与附注标签（annotated）。<br>轻量标签很像一个不会改变的分支——它只是某个特定提交的引用。<br>而附注标签是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息，并且可以使用 GNU Privacy Guard （GPG）签名并验证。 通常会建议创建附注标签，这样你可以拥有以上所有信息。但是如果你只是想用一个临时的标签， 或者因为某些原因不想要保存这些信息，那么也可以用轻量标签。<br>—— <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE">Pro Git 2.6 章</a></p>
+<p>Git 支持两种标签：轻量标签（lightweight）与附注标签（annotated）。<br>
+轻量标签很像一个不会改变的分支——它只是某个特定提交的引用。<br>
+而附注标签是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息，并且可以使用 GNU Privacy Guard （GPG）签名并验证。 通常会建议创建附注标签，这样你可以拥有以上所有信息。但是如果你只是想用一个临时的标签， 或者因为某些原因不想要保存这些信息，那么也可以用轻量标签。<br>
+—— <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%89%93%E6%A0%87%E7%AD%BE">Pro Git 2.6 章</a></p>
 </blockquote>
 <p>检出（checkout，查看，移动到某个分支、提交或标签上）到某个标签上后，提交的内容不会有改变，需要检出到具体的哈希，或者直接从这个 tag 建立一个新的分支才行。但是 tag 并不会跟随你的提交进行改变，会导致标签和分支不同步或者割裂的情况。</p>
 <p>tag 的使用可以让项目更加好区分一个个具体的版本，个人认为，tag 是用来区分每次发布的一个标记，用来方便后续对某个版本的代码的确定。无论是要重新打包或者修复 bug 都能提供一个清晰的依据。</p>
-<h2 id="关于-Git-的感悟"><a href="#关于-Git-的感悟" class="headerlink" title="关于 Git 的感悟"></a>关于 Git 的感悟</h2><p>版本控制通过记录历史差异的方式，方便我们去查看文件的历史变化和保存不同的副本，这也将方便我们进行协作。</p>
+<h2 id="关于-Git-的感悟"><a class="header-anchor" href="#关于-Git-的感悟">¶</a>关于 Git 的感悟</h2>
+<p>版本控制通过记录历史差异的方式，方便我们去查看文件的历史变化和保存不同的副本，这也将方便我们进行协作。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/21/how-to-use-git/" data-id="cl73dd4jo0000b2ow153l3uis" data-title="how to use git" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/21/how-to-use-git/" data-id="cl73f4hyl0000bjola3kcaeqw" data-title="how to use git" class="article-share-link">Teilen</a>
       
       
       
@@ -158,57 +162,74 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ul>
-<li><p>异步：异步指两个或两个以上的对象或事件不同时存在或发生</p>
+        <h2 id="名词解释"><a class="header-anchor" href="#名词解释">¶</a>名词解释</h2>
+<ul>
+<li>
+<p>异步：异步指两个或两个以上的对象或事件不同时存在或发生</p>
 </li>
-<li><p>同步：各方都实时地收取信息的即时沟通方式，即为同步。</p>
+<li>
+<p>同步：各方都实时地收取信息的即时沟通方式，即为同步。</p>
 </li>
-<li><p>运行时：指运行时系统，即某门语言的宿主环境，在本文中一般指浏览器和 Node.js$^{[1]}$。</p>
+<li>
+<p>运行时：指运行时系统，即某门语言的宿主环境，在本文中一般指浏览器和 Node.js <sup>[1]</sup>。</p>
 </li>
-<li><p>阻塞：进程一直在等待某个事件的完成，期间无法执行其他操作。</p>
+<li>
+<p>阻塞：进程一直在等待某个事件的完成，期间无法执行其他操作。</p>
 </li>
 </ul>
-<h2 id="关于-JavaScript-同步异步的第一印象"><a href="#关于-JavaScript-同步异步的第一印象" class="headerlink" title="关于 JavaScript 同步异步的第一印象"></a>关于 JavaScript 同步异步的第一印象</h2><p>我们总是听说 JavaScript 是一个单线程$^{[2]}$的语言，所以代码都是同步的，按照书写的顺序去执行；不用考虑异步开发时容易造成的死锁和冲突问题。但是又经常在一些文档中看到 JavaScript 的异步操作等相关的内容，需要保证异步操作的顺序和结果的正确。想来一些朋友可能会有困扰，这两者到底是一个什么样的关系。为了介绍的简单一些，这篇文档先暂时不提 Promise、async&#x2F;await 和相应的影响。</p>
+<h2 id="关于-JavaScript-同步异步的第一印象"><a class="header-anchor" href="#关于-JavaScript-同步异步的第一印象">¶</a>关于 JavaScript 同步异步的第一印象</h2>
+<p>我们总是听说 JavaScript 是一个单线程 <sup>[2]</sup> 的语言，所以代码都是同步的，按照书写的顺序去执行；不用考虑异步开发时容易造成的死锁和冲突问题。但是又经常在一些文档中看到 JavaScript 的异步操作等相关的内容，需要保证异步操作的顺序和结果的正确。想来一些朋友可能会有困扰，这两者到底是一个什么样的关系。为了介绍的简单一些，这篇文档先暂时不提 Promise、async/await 和相应的影响。</p>
 <p>为什么需要异步 JavaScript？同步操作虽然可以降低学习门槛，并且在 ES5 中也并没有提出对异步的要求，但是为什么各种 JavaScript 运行时（浏览器或者 Node.js）都提供了异步的能力？主要原因还是同步造成的缺陷：耗时较长的函数会导致整个页面的卡死。</p>
 <p>因为同步代码是一行一行执行的，而当前端页面在处理数据或者等待网络请求的结果时，整个线程在进行等待，就会导致没办法去对页面进行操作无法对我们的点击事件等其他行为做出响应，这就是驱使大家给 JavaScript 添加异步能力的一个原因。</p>
-<p>大家的解决方法，就是通过使用事件和回调函数来解决这个问题。浏览器提供了相应的异步 API 比如 XHR$^{[3]}$（XMLHttpRequest 属于 Web API 的范畴，并不是 ECMA-262 中对语法的要求，所以是由运行时提供的），通过给 XHR 对象设置监听器和回调函数，函数调用这个 API 的时候，浏览器就根据提供的参数去进行网络请求。当请求成功的事件触发监听器后，就将回调函数添加到 JavaScript 引擎中去执行回调函数，实现异步操作的效果。<strong>通过让浏览器去额外执行那些比较花费时间的操作，保持页面的线程不被长期占用，然后设置事件监听和回调函数来实现获取异步函数的返回结果，这样主线程就可以保持是同步的，异步的操作由运行时在其他线程上执行。</strong></p>
-<h2 id="并发模型与事件循环"><a href="#并发模型与事件循环" class="headerlink" title="并发模型与事件循环"></a>并发模型与事件循环</h2><p>其实关于 JavaScript 的异步的原理和实现，有一个必读的文档，就是 mdn 撰写的关于并发模型与事件循环的文档$^{[4]}&amp;，描述的就是 JavaScript 运行时是如何实现并发，只有可以同时并发的执行多个线程，同时这几个线程之间可以通信，那么才会实现异步效果，使得代码可以进行异步编程。</p>
+<p>大家的解决方法，就是通过使用事件和回调函数来解决这个问题。浏览器提供了相应的异步 API 比如 XHR <sup>[3]</sup>（XMLHttpRequest 属于 Web API 的范畴，并不是 ECMA-262 中对语法的要求，所以是由运行时提供的），通过给 XHR 对象设置监听器和回调函数，函数调用这个 API 的时候，浏览器就根据提供的参数去进行网络请求。当请求成功的事件触发监听器后，就将回调函数添加到 JavaScript 引擎中去执行回调函数，实现异步操作的效果。<strong>通过让浏览器去额外执行那些比较花费时间的操作，保持页面的线程不被长期占用，然后设置事件监听和回调函数来实现获取异步函数的返回结果，这样主线程就可以保持是同步的，异步的操作由运行时在其他线程上执行。</strong></p>
+<h2 id="并发模型与事件循环"><a class="header-anchor" href="#并发模型与事件循环">¶</a>并发模型与事件循环</h2>
+<p>其实关于 JavaScript 的异步的原理和实现，有一个必读的文档，就是 mdn 撰写的关于并发模型与事件循环的文档 <sup>[4]</sup>，描述的就是 JavaScript 运行时是如何实现并发，只有可以同时并发的执行多个线程，同时这几个线程之间可以通信，那么才会实现异步效果，使得代码可以进行异步编程。</p>
 <p>为了理解事件监听和回调函数是如何实现异步，和其中涉及到运行时的引擎的设计，首先需要解释一下何为事件监听和异步。简单的例子可以说，你点击页面按钮的时候，触发了按钮上设置的点击监听器，而这个监听器再去触发设置在上面的回调函数。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function foo(someValue, callback) &#123;</span><br><span class="line">	const value = doSometing(someValue);</span><br><span class="line">	callback(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function bar() &#123;</span><br><span class="line">	foo(&quot;abcd&quot;, res =&gt; &#123;</span><br><span class="line">		console.log(res);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>如上，按照函数式编程的思想，函数是可以作为参数使用的。函数 foo 除了接受正常的进行计算用的参数以外，还接受了一个名为 callback 的参数，而这个参数是一个函数。这个 callback 就是回调函数。当在其他函数，比如 bar 函数中使用 foo 函数的时候，就可以将一个匿名函数作为参数传递给 foo。这样 foo 会在执行完计算操作后，将计算结果传递给回调函数。</p>
 <p>当讲到这一步时就可以看出来，JavaScript 的异步实现依赖于运行时提供的 API 来实现。当你调用这些 API 的时候，浏览器会添加一个监听器，并去把你要执行的另一个操作的参数去放到另一个线程中执行，当执行结束后，就会触发监听器，而浏览器就会把回调函数添加到发起异步请求的页面的 JavaScript 引擎中。这一套操作，就依靠并发模型与事件循环来实现。</p>
-<h3 id="并发模型与事件循环文档解读"><a href="#并发模型与事件循环文档解读" class="headerlink" title="并发模型与事件循环文档解读"></a>并发模型与事件循环文档解读</h3><p>模型结构：</p>
+<h3 id="并发模型与事件循环文档解读"><a class="header-anchor" href="#并发模型与事件循环文档解读">¶</a>并发模型与事件循环文档解读</h3>
+<p>模型结构：</p>
 <img src="/2022/08/21/js-async-01/the_javascript_runtime_environment_example.svg" class="" title="模型结构">
-
+<blockquote>
+<p>图片来源：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop/the_javascript_runtime_environment_example.svg">https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop/the_javascript_runtime_environment_example.svg</a></p>
+</blockquote>
 <p>在这个模型中，执行栈（Stack）中存储的是当前函数调用，每个帧是一个函数的参数和变量等具体内容，执行完一个函数就会出栈一个函数。堆（Heap）中是 JavaScript 程序中的各种对象以及的数据，程序执行的时候，通过指针来堆中取得具体的数据。队列（Queue）是待处理的消息队列，每一个消息代表一个事件监听器完成后被添加到队列中，而运行时可以通过这个消息来找到当时绑定的回调函数。</p>
 <p>当 JavaScript 引擎执行函数的时候，根据代码的执行顺序为函数创建帧并压入执行栈中，如果这个函数调用了其他函数，就为这个被调用的函数创建新的帧，然后压入执行栈中执行。每个函数执行完毕返回后，就弹出这个函数对应的帧，直到栈中的帧被执行完。</p>
 <p>当执行栈中的函数执行完后，就进入事件循环期间，运行时就会逐个处理队列中的消息，根据回调函数，创建新的帧压入执行栈让 JavaScript 引擎去执行代码。等栈空后，事件循环机制会再处理队列中的下一个消息的回调函数。</p>
 <p>队列中的每一个消息完整执行后，其他消息才执行，而当执行栈中的一个函数执行时，JavaScript 引擎不会被其他函数抢占，只有在执行栈中的帧都运行完毕之后才会去再次处理消息队列中的消息。这样的设计就在线程同步执行的基础上，实现了异步编程的效果，但是永远不会因为等待网络请求等其他操作而阻塞。</p>
 <p>当然，这样的设计也不是没有缺点的，当一个回调函数需要较长的处理时间时，由于点击和滚动页面等行为也是利用事件实现的，这时候 Web 应用程序就无法处理与用户的交互。只有被绑定监听器的事件发生的时候，回调函数才会添加到消息队列。</p>
 <p>还有一个典型的例子就是 setTimeout 这个 Web API，虽然函数有一个参数是设置计时器时间，但是因为事件循环机制的存在，实际执行的情况是。运行时在等待设置的延迟时间后，把回调函数添加到消息队列中。因为队列的先进先出的特性，如果此时队列中没有其它消息并且执行栈为空，设置的回调函数会被马上添加到执行栈中去处理。但是，如果有其它消息，setTimeout 的回调函数必须等待其它消息处理完后才能执行。因此第二个参数仅仅表示了最少延迟时间，而非确切的等待时间，等待的时间取决于队列里待处理的消息数量。</p>
-<p>针对这些问题，还有 Promise、async&#x2F;await，会在之后的文档中进行更进一步的解释。</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20607178/answer/2133648600">运行时（runtime）是什么意思？应该怎样深入且直观地理解？ - doodlewind 的回答 - 知乎</a></p>
+<p>针对这些问题，还有 Promise、async/await，会在之后的文档中进行更进一步的解释。</p>
+<h2 id="参考链接"><a class="header-anchor" href="#参考链接">¶</a>参考链接</h2>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20607178/answer/2133648600">运行时（runtime）是什么意思？应该怎样深入且直观地理解？ - doodlewind 的回答 - 知乎</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">JavaScript</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript">JavaScript</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop">并发模型与事件循环</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/EventLoop">并发模型与事件循环</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Introducing">异步 JavaScript 简介</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Introducing">异步 JavaScript 简介</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Asynchronous">异步</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Asynchronous">异步</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Synchronous">同步</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/Synchronous">同步</a></p>
 </li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl73dd4jy0004b2ow820fftsx" data-title="初识 JavaScript 异步" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl73f4hyw0004bjol2s5o436g" data-title="初识 JavaScript 异步" class="article-share-link">Teilen</a>
       
       
       
@@ -244,26 +265,33 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="两种-Web-Storage"><a href="#两种-Web-Storage" class="headerlink" title="两种 Web Storage"></a>两种 Web Storage</h2><p>Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。</p>
+        <h2 id="两种-Web-Storage"><a class="header-anchor" href="#两种-Web-Storage">¶</a>两种 Web Storage</h2>
+<p>Web Storage 有两种，分别是 sessionStorage 和 localStorage，区别主要在于两者的可用范围。</p>
 <p>时间上，sessionStorage 在页面会话期间（浏览器处于打开的情况，页面重新加载或者恢复）可用，关闭浏览器就会清理。页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话。而 localStorage 在浏览器关闭，再重新打开数据仍然存在。</p>
 <p>空间上，sessionStorage 只在当前页面会话中存在，并不能跨标签；而 localStorage 只要在同一域名下，是跨浏览器窗口的。</p>
-<h2 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a>详细解释</h2><p>主要解释关于页面会话的问题，localStorage 并不需要更多的解释。</p>
+<h2 id="详细解释"><a class="header-anchor" href="#详细解释">¶</a>详细解释</h2>
+<p>主要解释关于页面会话的问题，localStorage 并不需要更多的解释。</p>
 <p>属于同一个页面会话：</p>
 <ol>
-<li><p>重新加载：刷新页面。</p>
+<li>
+<p>重新加载：刷新页面。</p>
 </li>
-<li><p>恢复页面：恢复关闭的页面（如，chrome 的重新打开关闭的标签页功能），即便关闭这个页面后又打开了新的页面，只要是恢复这个行为，就还是上一个页面会话。</p>
+<li>
+<p>恢复页面：恢复关闭的页面（如，chrome 的重新打开关闭的标签页功能），即便关闭这个页面后又打开了新的页面，只要是恢复这个行为，就还是上一个页面会话。</p>
 </li>
 </ol>
 <p>不属于同一个页面会话的情况：</p>
 <ol>
-<li><p>新的页面也就有新的页面会话：复制链接重新打开等行为并不算同一个页面会话，即“打开多个相同的 URL 的 Tabs 页面，会创建各自的 sessionStorage”。</p>
+<li>
+<p>新的页面也就有新的页面会话：复制链接重新打开等行为并不算同一个页面会话，即“打开多个相同的 URL 的 Tabs 页面，会创建各自的 sessionStorage”。</p>
 </li>
-<li><p>关闭浏览器才清理：关闭对应浏览器标签或窗口，会清除对应的 sessionStorage。</p>
+<li>
+<p>关闭浏览器才清理：关闭对应浏览器标签或窗口，会清除对应的 sessionStorage。</p>
 </li>
 </ol>
-<p>注意，存储在 sessionStorage 或 localStorage 中的数据特定于页面的协议。也就是说 <a target="_blank" rel="noopener" href="http://example.com/">http://example.com</a> 与 <a target="_blank" rel="noopener" href="https://example.com/">https://example.com</a> 的 sessionStorage 和 localStorage 相互隔离。各浏览器支持的 localStorage 和 sessionStorage 容量上限不同。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<p>注意，存储在 sessionStorage 或 localStorage 中的数据特定于页面的协议。也就是说 <a target="_blank" rel="noopener" href="http://example.com">http://example.com</a> 与 <a target="_blank" rel="noopener" href="https://example.com">https://example.com</a> 的 sessionStorage 和 localStorage 相互隔离。各浏览器支持的 localStorage 和 sessionStorage 容量上限不同。</p>
+<h2 id="参考资料"><a class="header-anchor" href="#参考资料">¶</a>参考资料</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API">Web Storage API</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage">Window.sessionStorage</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/localStorage">Window.localStorage</a></li>
@@ -272,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl73dd4jt0001b2ow1ew3ftgt" data-title="Web Storage" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl73f4hyq0001bjol43in514x" data-title="Web Storage" class="article-share-link">Teilen</a>
       
       
       
@@ -308,10 +336,12 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>想写这篇博客的主要原因是，先前在工作中遇到了一些 git 的分支问题和冲突问题，所以想总结一下。</p>
+        <h2 id="起源"><a class="header-anchor" href="#起源">¶</a>起源</h2>
+<p>想写这篇博客的主要原因是，先前在工作中遇到了一些 git 的分支问题和冲突问题，所以想总结一下。</p>
 <p>当时是发生了这样一件事情。在和同事的项目合作中，当时不同的模块分别放在不同的文件夹中，没有编辑同一个文件的情况，但是却在我上传代码时，发生了冲突，这就非常匪夷所思了。为了解决这个问题，我查看了 commit 记录，却发现 commit 记录被大量的 Merge branch 所污染，而且因为使用习惯不够健康，也导致 commit 记录过长，难以追踪到问题的源头。</p>
 <p>因为这次事故，使我产生了问题，为什么我的 commit 记录上总是一堆分支合并？同样，为什么会有这次事故的出现？</p>
-<h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>先来看看自己的 git 使用坏习惯吧：</p>
+<h2 id="反思"><a class="header-anchor" href="#反思">¶</a>反思</h2>
+<p>先来看看自己的 git 使用坏习惯吧：</p>
 <ul>
 <li>项目几乎不建立分支</li>
 <li>当先前提交的 commit 内容有问题时，直接再叠一个修复问题的 commit</li>
@@ -320,30 +350,32 @@
 <li>对于由于其他人的误操作导致的冲突，采用直接覆盖文件的方式去解决冲突</li>
 </ul>
 <p>很难相信，这些习惯是看过 <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git</a> 这本书的人做出来的操作。同样，也是在实际使用中遇到了问题，才意识到 Git 很多功能的作用和使用时一些约定俗成的规则是为了避免和解决那些问题。</p>
-<h2 id="分析问题"><a href="#分析问题" class="headerlink" title="分析问题"></a>分析问题</h2><p>首先对上面那些坏习惯会带来什么问题，以及这些问题和起源里讲的故事有什么关系进行分析。</p>
+<h2 id="分析问题"><a class="header-anchor" href="#分析问题">¶</a>分析问题</h2>
+<p>首先对上面那些坏习惯会带来什么问题，以及这些问题和起源里讲的故事有什么关系进行分析。</p>
 <p>这些问题将会导致项目的 commit 记录中有大量的信息，同时也会导致难以定位、查找错误的位置。先回到之前工作的时候发现的问题上，这个事故的产生，和上面提到的这些坏习惯是有直接关联的。</p>
 <p>当时事情是这样发生的，另一名同事的电脑出现了一些问题，所以他把自己开发到一半的代码给拷贝了出来。看到这名同事发生的意外，一同开发这个项目的我们都纷纷同步了代码，将目前的开发进度进行了上传，当然，都在同一个分支内。这名电脑出现故障的同事借用了另一台电脑开发结束后，用另外一位同事的 Git 用户信息，clone 了项目后，利用 vsc 的源代码管理工具进行了同步。</p>
 <p>到这一步就会发现，他复制的代码相较于远程分支是较为落后的，在 commit 中影响了其他人的文件，这自然会在同步的时候发生冲突。因为他使用的是 vsc 的源代码管理工具，所以看到了下面的内容：</p>
 <img src="/2022/07/21/merge-branches/vsc-merge-conflict.png" class="" title="vsc 合并冲突的右键选项">
-
 <p>在这里，当前内容指的是本地的改动，而传入版本是远程的改动，这一操作导致了最后问题的产生。</p>
 <hr>
 <p>故事讲完了，我来说说这个问题的查找过程中发现的一些内容吧。</p>
 <p>首先是借用其他人的 Git 用户信息这个，使得我在查看 commit 日志中遇到了很大的困难，一开始以为是不是谁配置的工作流导致的问题。同时，在查看记录时，发现了类似下面的情况：</p>
 <img src="/2022/07/21/merge-branches/commit-merge-branch.jpg" class="" title="commit 触发的分支合并">
-
 <p>即，我明明只是利用 vsc 的分支管理工具，执行了 git pull 和 git push 命令，为什么导致在没有编辑同一文件内容的情况下产生了分支合并。根据 Pro Git 上的<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF#%E6%8B%89%E5%8F%96:~:text=%E7%84%B6%E8%80%8C%EF%BC%8C%E6%9C%89%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4%E5%8F%AB%E4%BD%9C%20git%20pull%20%E5%9C%A8%E5%A4%A7%E5%A4%9A%E6%95%B0%E6%83%85%E5%86%B5%E4%B8%8B%E5%AE%83%E7%9A%84%E5%90%AB%E4%B9%89%E6%98%AF%E4%B8%80%E4%B8%AA%20git%20fetch%20%E7%B4%A7%E6%8E%A5%E7%9D%80%E4%B8%80%E4%B8%AA%20git%20merge%20%E5%91%BD%E4%BB%A4">描述</a>， git pull 相当于 git fetch 和 git merge 的组合，也正因为这个特点，导致了大量 merge 行为的产生。同时，功能的开发的提交在主分支上，不建立分支，也不和主分支保持同步也是导致这次事故产生的原因。相比较而言，vsc 的分支管理工具的略含误导的描述，反而显得并不那么重要了。</p>
 <p>那么，“正确”的处理方式应该是什么样子的呢？有哪些比较优秀的解决方案呢？</p>
-<h2 id="改变使用-Git-的坏习惯"><a href="#改变使用-Git-的坏习惯" class="headerlink" title="改变使用 Git 的坏习惯"></a>改变使用 Git 的坏习惯</h2><p>首先要注意的是，使用 Git 一定要勤用分支，因为 Git 的每次提交都是基于快照，而分支是指向某个快照的指针，所以使用分支在 Git 上的开销非常小，但是收益很明显。利用分支，将每次新功能的添加放在和主分支独立的地方，使得其他开发者每次都可以从一个完整的环境开始。<code>git checkout -b branch_name</code> 命令可以让你从当前位置新建一个分支。</p>
+<h2 id="改变使用-Git-的坏习惯"><a class="header-anchor" href="#改变使用-Git-的坏习惯">¶</a>改变使用 Git 的坏习惯</h2>
+<p>首先要注意的是，使用 Git 一定要勤用分支，因为 Git 的每次提交都是基于快照，而分支是指向某个快照的指针，所以使用分支在 Git 上的开销非常小，但是收益很明显。利用分支，将每次新功能的添加放在和主分支独立的地方，使得其他开发者每次都可以从一个完整的环境开始。<code>git checkout -b branch_name</code> 命令可以让你从当前位置新建一个分支。</p>
 <p>当你在分支上开发结束之后，不要急于合并到主分支，而是要先查看祖先分支的变化。举两个例子来描述问题。</p>
 <p>当你在本地分支开发新功能的时候，由于主分支上存在的 bug 你改变了主分支的状态。可以先在要被合并的分支上使用 <code>git rebase main_branch</code> 来将你和主分支上的差异消除，这样当你在本地合并分支的时候，就可以利用分支合并的快速模式来合并分支。这样的好处是只会有分支指针的前进，而不会产生新的提交，当你在本地合并完成后，再提交到远程分支就可以了。</p>
 <p>对于远程分支的情况也是类似的操作。当你执行 <code>git pull</code> 命令的时候，由于你本地的主分支显然落后于远程分支，你就可以很方便的从远程分支上获取到最新的变动，然后你再将本地开发的新内容合并到主分支后提交，这样就可以大大减轻产生冲突的风险。</p>
 <p>当然，对于多人在同一个分支开发的情况，我比较建议使用 <code>git pull --rebase</code> 这个命令来获取其他开发者的更新内容。因为如果是默认的 <code>git pull</code> 将会造成分支的合并，而根据<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">测试</a>的情况，会产生一个 merge 的提交，使得生成了一个所有和远程分支有不同内容的你的内容的快照。大量的 merge 信息会影响对项目提交历史的追踪。</p>
 <p>当然，这些只是由于我先前的经历导致的对 Git 的一些操作感受，如果说能够很好的做好分支和合并操作，同时每个 Git 的使用者也能去避免不必要的冲突的产生和妥善处理冲突的产生。那么直接使用 <code>git pull</code> 所产生的合并快照也可以很形象的告诉开发者，每次新开发的功能的合并位置。</p>
 <p>也推荐看一下我后续写的关于如何使用 Git 的博客和 Git 的测试项目。</p>
-<h2 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h2><p>今天看到了知乎上套路的一个问题，和这个博客也是蛮相关的，特此推荐看一下。</p>
+<h2 id="补充内容"><a class="header-anchor" href="#补充内容">¶</a>补充内容</h2>
+<p>今天看到了知乎上套路的一个问题，和这个博客也是蛮相关的，特此推荐看一下。</p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/36509119">在开发过程中使用 git rebase 还是 git merge，优缺点分别是什么？</a></p>
-<h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><ul>
+<h2 id="参考内容"><a class="header-anchor" href="#参考内容">¶</a>参考内容</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
 <li><a target="_blank" rel="noopener" href="https://learngitbranching.js.org/?locale=zh_CN">Learn Git Branching 小游戏</a></li>
 </ul>
@@ -351,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl73dd4jz0005b2owauys1uky" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl73f4hyx0005bjolg1fdbbkn" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
       
       
       
@@ -387,24 +419,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
-<h2 id="hexo-部署到-GitHub-Pages-的一些问题"><a href="#hexo-部署到-GitHub-Pages-的一些问题" class="headerlink" title="hexo 部署到 GitHub Pages 的一些问题"></a>hexo 部署到 GitHub Pages 的一些问题</h2><p>首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。<br><a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">hexo 的官方部署教程</a><br>但是要提醒的是，主要要注意的是步骤二和步骤四。</p>
+        <h2 id="简介"><a class="header-anchor" href="#简介">¶</a>简介</h2>
+<p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>
+同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
+<h2 id="hexo-部署到-GitHub-Pages-的一些问题"><a class="header-anchor" href="#hexo-部署到-GitHub-Pages-的一些问题">¶</a>hexo 部署到 GitHub Pages 的一些问题</h2>
+<p>首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。<br>
+<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">hexo 的官方部署教程</a><br>
+但是要提醒的是，主要要注意的是步骤二和步骤四。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span>  <span class="comment"># default branch</span></span><br></pre></td></tr></table></figure>
-
 <p>在修改 workflows 的 pages.yml 文件中，除了文档中专门提到的 node 的版本问题，还要修改如上面代码中写的分支，如果分支没有写对的话，这个 workflows 是不会执行的。执行不成功也就不会自动生成 gh-pages 分支来用于部署。</p>
 <p>同时，在提交代码之后，GitHub Pages 的部署工作流会运行，因为代码中含有文件名为下划线开头的文件（如：_config.yml）。这将会导致文件被识别为 jekyll 博客，GitHub 就会自动按照 jekyll 博客的方式去处理，导致构造和部署的工作流失败。</p>
 <p>针对这个工作流失败的问题描述和内容可以参考这个 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/3212">issue</a>。解决方案同样可以参考这个issue中提到的<a target="_blank" rel="noopener" href="https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/">连接</a>。</p>
 <p>然而，这并不是解决这个问题的“正确”方法。之所以会出现没有按照预想的方式进行部署和文档中提到的步骤六有关，因为还没有正确的设置 GitHub Pages 的资源位置信息。同时，如果去观察自动生成的 gh-pages 分支内容时，里面也是有和上面同样的处理方式的（添加一个名为 .nojekyll 的文件）。</p>
 <p>当修改成功后，你应该看到你的工作流大致如下图：</p>
 <img src="/2022/07/04/hello-world/workflows.jpg" class="" title="工作流失败和成功的图片">
-
-<p>这时候就可以去访问 username.github.io 就可以看到自己的博客了。</p>
-<h2 id="hexo-的一些常用操作"><a href="#hexo-的一些常用操作" class="headerlink" title="hexo 的一些常用操作"></a>hexo 的一些常用操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">本地启动</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建一个草稿</span></span><br><span class="line">hexo new draft &quot;title&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发布一个草稿</span></span><br><span class="line">hexo publish &quot;title&quot;</span><br></pre></td></tr></table></figure>
+<p>这时候就可以去访问 <a target="_blank" rel="noopener" href="http://username.github.io">username.github.io</a> 就可以看到自己的博客了。</p>
+<h2 id="hexo-的一些常用操作"><a class="header-anchor" href="#hexo-的一些常用操作">¶</a>hexo 的一些常用操作</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">本地启动</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建一个草稿</span></span><br><span class="line">hexo new draft &quot;title&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发布一个草稿</span></span><br><span class="line">hexo publish &quot;title&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="使用中的一些补充"><a class="header-anchor" href="#使用中的一些补充">¶</a>使用中的一些补充</h2>
+<p>hexo 默认提供的 markdown 渲染器并不能提供所有的功能，比如上标功能就没有提供，所以我根据一个<a target="_blank" rel="noopener" href="https://jovi.uxlib.net/add-superscript-subscript-footnote-and-other-functions-to-hexo.html/">链接</a>中的内容进行了更改，现在可以支持上标功能了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl73dd4jv0002b2owgzdxete7" data-title="hello world" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl73f4hyt0002bjolfh8t4d7d" data-title="hello world" class="article-share-link">Teilen</a>
       
       
       

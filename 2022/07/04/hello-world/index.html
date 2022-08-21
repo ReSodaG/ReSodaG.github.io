@@ -6,16 +6,16 @@
   
   <title>hello world | Storh的打字台</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="简介博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。同时本文也兼顾写一些我在博客部署时遇到的一些问题。 hexo 部署到 GitHub Pages 的一些问题首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。hexo 的官方部署教程但是要提醒的是，主要要注意的是步骤二和步骤四。 1234on:  push:    br">
+  <meta name="description" content="¶简介 博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。 同时本文也兼顾写一些我在博客部署时遇到的一些问题。 ¶hexo 部署到 GitHub Pages 的一些问题 首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。 hexo 的官方部署教程 但是要提醒的是，主要要注意的是步骤二和步骤四。 1234on:  push">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hello world">
 <meta property="og:url" content="https://storh.github.io/2022/07/04/hello-world/">
 <meta property="og:site_name" content="Storh的打字台">
-<meta property="og:description" content="简介博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。同时本文也兼顾写一些我在博客部署时遇到的一些问题。 hexo 部署到 GitHub Pages 的一些问题首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。hexo 的官方部署教程但是要提醒的是，主要要注意的是步骤二和步骤四。 1234on:  push:    br">
+<meta property="og:description" content="¶简介 博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。 同时本文也兼顾写一些我在博客部署时遇到的一些问题。 ¶hexo 部署到 GitHub Pages 的一些问题 首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。 hexo 的官方部署教程 但是要提醒的是，主要要注意的是步骤二和步骤四。 1234on:  push">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://storh.github.io/2022/07/04/hello-world/workflows.jpg">
 <meta property="article:published_time" content="2022-07-04T06:32:19.000Z">
-<meta property="article:modified_time" content="2022-08-21T13:32:33.859Z">
+<meta property="article:modified_time" content="2022-08-21T14:21:55.597Z">
 <meta property="article:author" content="Storh">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://storh.github.io/2022/07/04/hello-world/workflows.jpg">
@@ -97,24 +97,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
-<h2 id="hexo-部署到-GitHub-Pages-的一些问题"><a href="#hexo-部署到-GitHub-Pages-的一些问题" class="headerlink" title="hexo 部署到 GitHub Pages 的一些问题"></a>hexo 部署到 GitHub Pages 的一些问题</h2><p>首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。<br><a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">hexo 的官方部署教程</a><br>但是要提醒的是，主要要注意的是步骤二和步骤四。</p>
+        <h2 id="简介"><a class="header-anchor" href="#简介">¶</a>简介</h2>
+<p>博客采用 hexo 和 GitHub Pages 结合，配置自己的个人博客页面，发布一些自己总结学习的内容。<br>
+同时本文也兼顾写一些我在博客部署时遇到的一些问题。</p>
+<h2 id="hexo-部署到-GitHub-Pages-的一些问题"><a class="header-anchor" href="#hexo-部署到-GitHub-Pages-的一些问题">¶</a>hexo 部署到 GitHub Pages 的一些问题</h2>
+<p>首先要表明的是，hexo 的文档还是比较详实的，参照如下链接操作即可。<br>
+<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages">hexo 的官方部署教程</a><br>
+但是要提醒的是，主要要注意的是步骤二和步骤四。</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">master</span>  <span class="comment"># default branch</span></span><br></pre></td></tr></table></figure>
-
 <p>在修改 workflows 的 pages.yml 文件中，除了文档中专门提到的 node 的版本问题，还要修改如上面代码中写的分支，如果分支没有写对的话，这个 workflows 是不会执行的。执行不成功也就不会自动生成 gh-pages 分支来用于部署。</p>
 <p>同时，在提交代码之后，GitHub Pages 的部署工作流会运行，因为代码中含有文件名为下划线开头的文件（如：_config.yml）。这将会导致文件被识别为 jekyll 博客，GitHub 就会自动按照 jekyll 博客的方式去处理，导致构造和部署的工作流失败。</p>
 <p>针对这个工作流失败的问题描述和内容可以参考这个 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues/3212">issue</a>。解决方案同样可以参考这个issue中提到的<a target="_blank" rel="noopener" href="https://github.blog/2009-12-29-bypassing-jekyll-on-github-pages/">连接</a>。</p>
 <p>然而，这并不是解决这个问题的“正确”方法。之所以会出现没有按照预想的方式进行部署和文档中提到的步骤六有关，因为还没有正确的设置 GitHub Pages 的资源位置信息。同时，如果去观察自动生成的 gh-pages 分支内容时，里面也是有和上面同样的处理方式的（添加一个名为 .nojekyll 的文件）。</p>
 <p>当修改成功后，你应该看到你的工作流大致如下图：</p>
 <img src="/2022/07/04/hello-world/workflows.jpg" class="" title="工作流失败和成功的图片">
-
-<p>这时候就可以去访问 username.github.io 就可以看到自己的博客了。</p>
-<h2 id="hexo-的一些常用操作"><a href="#hexo-的一些常用操作" class="headerlink" title="hexo 的一些常用操作"></a>hexo 的一些常用操作</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">本地启动</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建一个草稿</span></span><br><span class="line">hexo new draft &quot;title&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发布一个草稿</span></span><br><span class="line">hexo publish &quot;title&quot;</span><br></pre></td></tr></table></figure>
+<p>这时候就可以去访问 <a target="_blank" rel="noopener" href="http://username.github.io">username.github.io</a> 就可以看到自己的博客了。</p>
+<h2 id="hexo-的一些常用操作"><a class="header-anchor" href="#hexo-的一些常用操作">¶</a>hexo 的一些常用操作</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">本地启动</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建一个草稿</span></span><br><span class="line">hexo new draft &quot;title&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">发布一个草稿</span></span><br><span class="line">hexo publish &quot;title&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="使用中的一些补充"><a class="header-anchor" href="#使用中的一些补充">¶</a>使用中的一些补充</h2>
+<p>hexo 默认提供的 markdown 渲染器并不能提供所有的功能，比如上标功能就没有提供，所以我根据一个<a target="_blank" rel="noopener" href="https://jovi.uxlib.net/add-superscript-subscript-footnote-and-other-functions-to-hexo.html/">链接</a>中的内容进行了更改，现在可以支持上标功能了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl73dd4jv0002b2owgzdxete7" data-title="hello world" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl73f4hyt0002bjolfh8t4d7d" data-title="hello world" class="article-share-link">Teilen</a>
       
       
       
