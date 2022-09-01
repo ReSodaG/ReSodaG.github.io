@@ -73,8 +73,8 @@
   
     <article id="post-how-to-use-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/08/21/how-to-use-git/" class="article-date">
-  <time class="dt-published" datetime="2022-08-21T14:35:33.535Z" itemprop="datePublished">2022-08-21</time>
+    <a href="/2022/09/01/how-to-use-git/" class="article-date">
+  <time class="dt-published" datetime="2022-09-01T15:23:28.801Z" itemprop="datePublished">2022-09-01</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/08/21/how-to-use-git/">如何使用 Git</a>
+      <a class="p-name article-title" href="/2022/09/01/how-to-use-git/">如何使用 Git</a>
     </h1>
   
 
@@ -131,7 +131,7 @@
 <p>同时要注意的是，如果从原有的分支上分离出来了新的分支，并且原先的分支依旧在前进，这种情况也是属于三方合并的。此时的分支状态就相当于已经进行了一次快进，将主分支的指针向前移动到了某个分支的终点。但是不鼓励这种做法，如果原本分支的修改很容易产生可以影响到其他分支的冲突。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先移动到主分支上</span></span><br><span class="line">git checkout test</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">快速前进到第一个分支上</span></span><br><span class="line">git merge test-1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">和第二个分支触发三方合并</span></span><br><span class="line">git merge test-2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">合并结束后删除已经合并的分支</span></span><br><span class="line">git branch -d test-1</span><br><span class="line">git branch -d test-2</span><br></pre></td></tr></table></figure>
 <p>分支合并后的结果如下图：</p>
-<img src="/2022/08/21/how-to-use-git/merge-branch-without-conflict.jpg" class="" title="没有冲突的分支合并">
+<img src="/2022/09/01/how-to-use-git/merge-branch-without-conflict.jpg" class="" title="没有冲突的分支合并">
 <p><img src="how-to-use-git/merge-branch-without-conflict.jpg" alt="没有冲突的分支合并"></p>
 <p>可以看出来，这样操作产生了分支合并的 Git 记录。等于说在 Git 的操作下，产生了一个新的快照，test-1 和 test-2 的最后一次提交是这个快照的两个父级，而 test 这个分支指针指向了这个自动产生的提交上。</p>
 <p>以上操作可以查看本项目 test/1 文件夹中的内容。</p>
@@ -141,13 +141,13 @@
 <p>可以看到，git 在遇到冲突的时候，会把不能进行合并的两个提交块进行对比显示，针对修改的代码内容，将会将两块内容都进行对比，即便是两个不同的提交并没有修改同一行代码，或者修改的内容前后添加了空行去分割。而对于新增的内容，如果新增的内容是相同的，就不会显示为冲突。</p>
 <p>同时我们观察合并分支这个行为，在 git log 中的显示可以看出，他本质上也是一次 commit 只不过带上了一个 Merge 属性，写着合并的是那两个提交的哈希。正因为合并分支也是新增一个提交，所以在一些查看 Git 记录的插件中也能看到这次提交的内容。在这个提交中，只会显示当前被合并进来的分支中的独有的内容。如果是两个分支将同一个文件修改为同样的状态，或者添加了同样的文件，那么这些已经被提交的文件并不会显示在这次的合并提交中。</p>
 <p>有冲突的文件将会标记好对应提交的哈希放在文件中，需要自己去进行处理后暂存。而已经暂存好的文件并不需要去改动，因为这是 Git 自己处理发现的被合并进主分支的分支所修改的内容，你修改好的发生冲突的文件将会覆盖原先提交中的那个文件。你点开查看提交内容的时候，显示的内容是不同（文件的变更前后的提交哈希不同），而另一个没有冲突的文件点开后显示的内容是相同的（文件被加入的哈希是相同的）。</p>
-<img src="/2022/08/21/how-to-use-git/commit-merge.jpg" class="" title="test-2 分支合并到 test 分支上时显示的提交的文件">
+<img src="/2022/09/01/how-to-use-git/commit-merge.jpg" class="" title="test-2 分支合并到 test 分支上时显示的提交的文件">
 <p><img src="how-to-use-git/commit-merge.jpg" alt="test-2 分支合并到 test 分支上时显示的提交的文件"></p>
 <p>从上图可以看从，相同的文件 file 和 file copy 没有被加入到这次提交当中，而没有冲突的 file2 文件的来源哈希是在 test-2 最后编辑这个文件的哈希（以上描述请参考 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">test/3</a> 这次试验和<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3/info.md">结论</a>理解）。</p>
 <p>另外，在 vsc 上显示的提交顺序是优先按照祖先关系排序，然后根据提交的时间。如：按照时间顺序，先是对 test-1 分支进行了提交，然后和 test-2 分支交替提交一些内容，在快结束的时候，突然意识到应该提供一个双方修改相同的文件，于是在 test 分支上新增了文件后，利用 Git rebase 来将这次的提交作为两个分支的共同祖先结点，这样两个分支就仿佛从一开始就有了这个同样的文件。然后先快进到 test-1 分支，在合并 test-2 分支。但是最后显示的效果将会是这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     2-3---5--</span><br><span class="line">    /         \</span><br><span class="line">-1-7           merge</span><br><span class="line">    \         /</span><br><span class="line">     ----4---6</span><br></pre></td></tr></table></figure>
 <p>其中，7 就是利用 rebase 来添加到主分支上的提交内容，实际测试结果如下图：</p>
-<img src="/2022/08/21/how-to-use-git/branch-test.jpg" class="" title="分支 test 在合并分支后显示的提交记录">
+<img src="/2022/09/01/how-to-use-git/branch-test.jpg" class="" title="分支 test 在合并分支后显示的提交记录">
 <p><img src="how-to-use-git/branch-test.jpg" alt="分支 test 在合并分支后显示的提交记录"></p>
 <p>以上修改的具体 Git 命令和操作截图以及文件，可以查看 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/1">test/1</a>、<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/2">test/2</a> 和 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">test/3</a> 这三个文件夹中的内容和信息。</p>
 <h2 id="关于-Git-的感悟"><a class="header-anchor" href="#关于-Git-的感悟">¶</a>关于 Git 的感悟</h2>
@@ -156,10 +156,129 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/21/how-to-use-git/" data-id="cl73fm13e0000agoo80b57vdk" data-title="如何使用 Git" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/09/01/how-to-use-git/" data-id="cl7j762fs0000b5n75nakhum9" data-title="如何使用 Git" class="article-share-link">Teilen</a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-js-async-02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/01/js-async-02/" class="article-date">
+  <time class="dt-published" datetime="2022-09-01T15:20:27.000Z" itemprop="datePublished">2022-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/09/01/js-async-02/">微任务和 Web Workers</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="推荐阅读"><a class="header-anchor" href="#推荐阅读">¶</a>推荐阅读</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903512845860872">这一次，彻底弄懂 JavaScript 执行机制</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903657264136200">微任务、宏任务与 Event-Loop</a></p>
+</li>
+</ul>
+<p>这两篇文章关于事件循环和运行机制讲的是比较易懂的，我也从这两篇文章中获得了很多的启发，在看本文之前，可以先看看这两篇文章，或许可以解决你的很多疑问。</p>
+<h2 id="引言"><a class="header-anchor" href="#引言">¶</a>引言</h2>
+<p>Promise 的出现，使得传统的事件循环机制出现了一些改变，在上一篇文章中，讲了并发模型和事件循环，但是没有涉及到 Promise 和 async/await 这两个分别在 ES6 和 ES8 中新添加的特性，这两个特性又给这个模型带来新的变化。这篇文章主要就基于这两个新添加特性对事件循环的影响来进行补充。</p>
+<h2 id="宏任务和微任务"><a class="header-anchor" href="#宏任务和微任务">¶</a>宏任务和微任务</h2>
+<p>在上一篇的文章中，我们知道，JavaScript 会把定时器的回调函数作为消息放入消息队列中进行事件循环，那么针对 Promise，浏览器会对他的回调做怎样的处理呢？答案是对任务去进行精细的区分，分为宏任务（macro-task）和微任务（micro-task）两种，然后放在不同的队列中。宏任务依旧是之前事件模型中定时器的回调函数队列，但是微任务队列中存放的，就是 Promise 的回调函数队列了。</p>
+<p>这时候，我们的事件模型有了变化，在每次循环中，除了之前的宏任务队列，还多了一个微任务队列，而 JavaScript 的代码执行顺序就会受到两个队列的调度先后的影响。 <strong>浏览器将会优先处理微任务队列，在微任务队列空的时候再去处理宏任务队列，这一变化带来的结果是，Promise 的回调将会在定时器的回调之前执行。如果一个微任务队列中的回调函数作用是返回一个新的微任务，将会微任务队列一直不为空，就会阻塞宏任务的执行。即便在这个过程中，微任务出队入队很多次任务，但是这依旧算作一次事件循环。</strong> 可以看下图来加深一下理解：</p>
+<img src="/2022/09/01/js-async-02/event-loop-microtasks.png" class="" title="有微任务的模型结构">
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.javascript.info/event-loop">图片来源</a></p>
+</blockquote>
+<p>如上图所示，在事件循环中，宏任务列表的第一个任务是执行网页 script 标签中的代码，然后执行的过程中产生了微任务，用户触发了移动鼠标的监听器，和入队了如图中 setTimeout 一样的宏任务。然后浏览器将会优先执行完微任务的所以任务，就像图中 microtasks 前的循环标记一样，直到微循环结束之后才去渲染网页，执行其中的元素修改，此时一个事件循环才处理完，接下来处理用户鼠标移动触发的宏任务……</p>
+<h2 id="执行顺序"><a class="header-anchor" href="#执行顺序">¶</a>执行顺序</h2>
+<p>为了证明这些执行顺序，我写了一个小 demo 大家可以尝试一下。这里是<a href="https://storh.github.io/event-loop-test/">链接</a>和<a target="_blank" rel="noopener" href="https://github.com/Storh/event-loop-test">仓库</a>。</p>
+<h3 id="证明微任务的执行是根据微任务的入队顺序"><a class="header-anchor" href="#证明微任务的执行是根据微任务的入队顺序">¶</a>证明微任务的执行是根据微任务的入队顺序</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Promise 0 1&quot;</span>))</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Promise 0 2&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Promise 1 1&quot;</span>))</span><br><span class="line">    .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Promise 1 2&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Promise 0 1</span><br><span class="line">Promise 1 1</span><br><span class="line">Promise 0 2</span><br><span class="line">Promise 1 2</span><br></pre></td></tr></table></figure>
+<p>可以看到，这两个 Promise 的回调先后进入微任务队列，当第一个回调函数执行的时候，将链式调用的回调函数重新加入队列，根据队列的先进先出特性，接下来执行的就应该是第二个 Promise 的回调函数，而不是链式调用的回调。</p>
+<h3 id="证明微任务总在宏任务前"><a class="header-anchor" href="#证明微任务总在宏任务前">¶</a>证明微任务总在宏任务前</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 0 start&quot;</span>);</span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">        .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 0 Promise 0&quot;</span>))</span><br><span class="line">        .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 0 Promise 1&quot;</span>));</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 0 end&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 1 start&quot;</span>);</span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">        .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 1 Promise 0&quot;</span>))</span><br><span class="line">        .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 1 Promise 1&quot;</span>));</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;setTimeout 1 end&quot;</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">setTimeout 0 start</span><br><span class="line">setTimeout 0 end</span><br><span class="line">setTimeout 0 Promise 0</span><br><span class="line">setTimeout 0 Promise 1</span><br><span class="line">setTimeout 1 start</span><br><span class="line">setTimeout 1 end</span><br><span class="line">setTimeout 1 Promise 0</span><br><span class="line">setTimeout 1 Promise 1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="验证微任务队列的执行会阻塞渲染"><a class="header-anchor" href="#验证微任务队列的执行会阻塞渲染">¶</a>验证微任务队列的执行会阻塞渲染</h3>
+<p>这个验证的方法参考了<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/62562845/any-example-proving-microtask-is-executed-before-rendering">这个问题的回答</a>，做了一些小改进。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">microtaskTimeout</span> = (<span class="params">rowSecond</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> startTime = <span class="title class_">Date</span>.<span class="title function_">now</span>();</span><br><span class="line">    <span class="keyword">const</span> second = <span class="title class_">Number</span>(rowSecond);</span><br><span class="line">    <span class="keyword">if</span> (second) &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="title function_">timeout</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title class_">Date</span>.<span class="title function_">now</span>() - startTime &lt; second * <span class="number">1000</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="title class_">Promise</span>.<span class="title function_">resolve</span>()</span><br><span class="line">                    .<span class="title function_">then</span>(timeout);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">timeout</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">clickButton</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;clickButton start&quot;</span>)</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;intl&quot;</span>).<span class="property">textContent</span> = <span class="string">&quot;点击后经过 5s 才修改&quot;</span>;</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;line&quot;</span>).<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">    <span class="title function_">microtaskTimeout</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;clickButton end&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>当进行点击之后就会看到，即便修改 dom 的代码在前，但是页面还是被微任务队列阻塞，直到微任务队列空才修改了 dom 元素（在单步调试的时候不会有这种效果，dom 元素的修改会是实时的）。</p>
+<h2 id="微任务小结"><a class="header-anchor" href="#微任务小结">¶</a>微任务小结</h2>
+<p>了解事件循环的机制后，就可以轻松理解 JavaScript 的代码执行顺序了，在使用异步操作的时候就会更加得心应手。我在 demo 地址的最后也给了一个例子来演示执行顺序。文末给到的参考链接中也有很多会给出同样的小示例。 <strong>但是要注意一个要注意的点，一切实现都是基于标准的。不能把目前的顺序或者某一个特定版本下的效果看作“金科玉律”，要去关注标准的变化，这点相信大家看完这个<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000016147496">问答</a>之后就会有相同的体会。</strong></p>
+<h2 id="Web-Workers"><a class="header-anchor" href="#Web-Workers">¶</a>Web Workers</h2>
+<p>当你需要在前端页面上运行一个非常花时间的程序的时候，应该怎么办？通过前面的学习我们可以知道，用户的操作是以事件的形式在页面上调度的，而微任务和长时间运行的程序都会阻塞事件循环，使得我们的点击事件等行为长时间无法响应。有一种利用现有的工具，将一个操作拆分成多个计算任务，在每个计算任务结束后再把下一次计算利用 setTimeout 的形式加入宏任务队列中，使得页面得以响应，还能利用这种形式去进行进度条的显示，具体的例子可以参考这个<a target="_blank" rel="noopener" href="https://zh.javascript.info/event-loop#yong-li-2-jin-du-zhi-shi">用例</a>。</p>
+<p>这种解决办法增加了编码的复杂度，同时也不是所有的操作都方便更改成这样，所以在 Web API 中提供了这个功能——Web Workers。</p>
+<p>Web Workers 可以让你在独立于页面主线程的后台线程中执行函数，来解决线程阻塞的问题。在我先前提到的<a href="https://storh.github.io/event-loop-test/">小 demo</a> 中我也有做同样的例子，可以用来进行尝试，可以看到在执行 Web Workers 的时候并不影响在页面的点击和内容修改，而结果也可以正常的获取。同时，在 Chrome 的开发者工具的性能选项中，也可以看到，Web Workers 在执行的时候并没有像后面的例子一样阻塞主线程。</p>
+<img src="/2022/09/01/js-async-02/web-workers.png" class="" title="浏览器的性能选项">
+<p>而关于 Web Workers 的具体介绍和用法，可以参考 mdn web docs 中的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API">Web Workers API</a> 和<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API/Using_web_workers">使用 Web Workers</a> 这两篇文档。同时，mdn 也提供了一个 <a target="_blank" rel="noopener" href="https://github.com/mdn/dom-examples/tree/main/web-workers/simple-web-worker">demo</a> 可以供了解和学习。</p>
+<h2 id="参考链接-v2"><a class="header-anchor" href="#参考链接-v2">¶</a>参考链接</h2>
+<ol>
+<li>
+<p><a target="_blank" rel="noopener" href="https://zh.javascript.info/event-loop">事件循环：微任务和宏任务</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://zh.javascript.info/microtask-queue">微任务（Microtask）</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/62562845/any-example-proving-microtask-is-executed-before-rendering">Any example proving microtask is executed before rendering?</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Workers_API">Web Workers API</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/mdn/dom-examples/tree/main/web-workers/simple-web-worker">simple-web-worker</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">Tasks, microtasks, queues and schedules</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth">深入：微任务与 Javascript 运行时环境</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide">在 JavaScript 中通过 queueMicrotask() 使用微任务</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000016147496">async await 和 promise 微任务执行顺序问题</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017970432">JavaScript 事件循环(Event Loop)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015112913">理解 javascript 中的事件循环(Event Loop)</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://storh.github.io/2022/09/01/js-async-02/" data-id="cl7j762g40005b5n78edl8eon" data-title="微任务和 Web Workers" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
     </footer>
   </div>
   
@@ -257,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl73fm13q0004agooc6rh7xpa" data-title="初识 JavaScript 异步" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl7j762g30004b5n738r15rlh" data-title="初识 JavaScript 异步" class="article-share-link">Teilen</a>
       
       
       
@@ -328,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl73fm13k0001agooh03thnj5" data-title="Web Storage" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl7j762fy0001b5n77roa5cz2" data-title="Web Storage" class="article-share-link">Teilen</a>
       
       
       
@@ -411,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl73fm13r0005agoo1tiidrha" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl7j762g50006b5n78ffo7je3" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
       
       
       
@@ -470,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl73fm13n0002agoofwth4o2n" data-title="hello world" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl7j762g00002b5n7g4hrclwe" data-title="hello world" class="article-share-link">Teilen</a>
       
       
       
@@ -505,7 +624,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a>
+      <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a>
     </div>
   </div>
 
@@ -514,7 +633,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li></ul>
     </div>
   </div>
 
@@ -527,7 +646,11 @@
       <ul>
         
           <li>
-            <a href="/2022/08/21/how-to-use-git/">如何使用 Git</a>
+            <a href="/2022/09/01/how-to-use-git/">如何使用 Git</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/01/js-async-02/">微任务和 Web Workers</a>
           </li>
         
           <li>
@@ -540,10 +663,6 @@
         
           <li>
             <a href="/2022/07/21/merge-branches/">为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识</a>
-          </li>
-        
-          <li>
-            <a href="/2022/07/04/hello-world/">hello world</a>
           </li>
         
       </ul>
