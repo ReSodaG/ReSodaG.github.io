@@ -1,5 +1,5 @@
 ---
-title: 微任务和 Web Workers
+title: JavaScript 异步 02 - 微任务和 Web Workers
 tags:
   - JavaScript
 date: 2022-09-01 23:20:27
