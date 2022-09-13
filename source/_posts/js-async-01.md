@@ -1,5 +1,5 @@
 ---
-title: 初识 JavaScript 异步
+title: JavaScript 异步 01 - 初识 JavaScript 异步
 tags:
   - JavaScript
 date: 2022-08-21 21:31:57
