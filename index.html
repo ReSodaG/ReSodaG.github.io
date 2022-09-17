@@ -73,8 +73,8 @@
   
     <article id="post-how-to-use-git" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/09/13/how-to-use-git/" class="article-date">
-  <time class="dt-published" datetime="2022-09-13T06:31:21.283Z" itemprop="datePublished">2022-09-13</time>
+    <a href="/2022/09/17/how-to-use-git/" class="article-date">
+  <time class="dt-published" datetime="2022-09-17T10:37:09.317Z" itemprop="datePublished">2022-09-17</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/13/how-to-use-git/">如何使用 Git</a>
+      <a class="p-name article-title" href="/2022/09/17/how-to-use-git/">如何使用 Git</a>
     </h1>
   
 
@@ -131,7 +131,7 @@
 <p>同时要注意的是，如果从原有的分支上分离出来了新的分支，并且原先的分支依旧在前进，这种情况也是属于三方合并的。此时的分支状态就相当于已经进行了一次快进，将主分支的指针向前移动到了某个分支的终点。但是不鼓励这种做法，如果原本分支的修改很容易产生可以影响到其他分支的冲突。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">先移动到主分支上</span></span><br><span class="line">git checkout test</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">快速前进到第一个分支上</span></span><br><span class="line">git merge test-1</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">和第二个分支触发三方合并</span></span><br><span class="line">git merge test-2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">合并结束后删除已经合并的分支</span></span><br><span class="line">git branch -d test-1</span><br><span class="line">git branch -d test-2</span><br></pre></td></tr></table></figure>
 <p>分支合并后的结果如下图：</p>
-<img src="/2022/09/13/how-to-use-git/merge-branch-without-conflict.jpg" class="" title="没有冲突的分支合并">
+<img src="/2022/09/17/how-to-use-git/merge-branch-without-conflict.jpg" class="" title="没有冲突的分支合并">
 <p><img src="how-to-use-git/merge-branch-without-conflict.jpg" alt="没有冲突的分支合并"></p>
 <p>可以看出来，这样操作产生了分支合并的 Git 记录。等于说在 Git 的操作下，产生了一个新的快照，test-1 和 test-2 的最后一次提交是这个快照的两个父级，而 test 这个分支指针指向了这个自动产生的提交上。</p>
 <p>以上操作可以查看本项目 test/1 文件夹中的内容。</p>
@@ -141,13 +141,13 @@
 <p>可以看到，git 在遇到冲突的时候，会把不能进行合并的两个提交块进行对比显示，针对修改的代码内容，将会将两块内容都进行对比，即便是两个不同的提交并没有修改同一行代码，或者修改的内容前后添加了空行去分割。而对于新增的内容，如果新增的内容是相同的，就不会显示为冲突。</p>
 <p>同时我们观察合并分支这个行为，在 git log 中的显示可以看出，他本质上也是一次 commit 只不过带上了一个 Merge 属性，写着合并的是那两个提交的哈希。正因为合并分支也是新增一个提交，所以在一些查看 Git 记录的插件中也能看到这次提交的内容。在这个提交中，只会显示当前被合并进来的分支中的独有的内容。如果是两个分支将同一个文件修改为同样的状态，或者添加了同样的文件，那么这些已经被提交的文件并不会显示在这次的合并提交中。</p>
 <p>有冲突的文件将会标记好对应提交的哈希放在文件中，需要自己去进行处理后暂存。而已经暂存好的文件并不需要去改动，因为这是 Git 自己处理发现的被合并进主分支的分支所修改的内容，你修改好的发生冲突的文件将会覆盖原先提交中的那个文件。你点开查看提交内容的时候，显示的内容是不同（文件的变更前后的提交哈希不同），而另一个没有冲突的文件点开后显示的内容是相同的（文件被加入的哈希是相同的）。</p>
-<img src="/2022/09/13/how-to-use-git/commit-merge.jpg" class="" title="test-2 分支合并到 test 分支上时显示的提交的文件">
+<img src="/2022/09/17/how-to-use-git/commit-merge.jpg" class="" title="test-2 分支合并到 test 分支上时显示的提交的文件">
 <p><img src="how-to-use-git/commit-merge.jpg" alt="test-2 分支合并到 test 分支上时显示的提交的文件"></p>
 <p>从上图可以看从，相同的文件 file 和 file copy 没有被加入到这次提交当中，而没有冲突的 file2 文件的来源哈希是在 test-2 最后编辑这个文件的哈希（以上描述请参考 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">test/3</a> 这次试验和<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3/info.md">结论</a>理解）。</p>
 <p>另外，在 vsc 上显示的提交顺序是优先按照祖先关系排序，然后根据提交的时间。如：按照时间顺序，先是对 test-1 分支进行了提交，然后和 test-2 分支交替提交一些内容，在快结束的时候，突然意识到应该提供一个双方修改相同的文件，于是在 test 分支上新增了文件后，利用 Git rebase 来将这次的提交作为两个分支的共同祖先结点，这样两个分支就仿佛从一开始就有了这个同样的文件。然后先快进到 test-1 分支，在合并 test-2 分支。但是最后显示的效果将会是这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     2-3---5--</span><br><span class="line">    /         \</span><br><span class="line">-1-7           merge</span><br><span class="line">    \         /</span><br><span class="line">     ----4---6</span><br></pre></td></tr></table></figure>
 <p>其中，7 就是利用 rebase 来添加到主分支上的提交内容，实际测试结果如下图：</p>
-<img src="/2022/09/13/how-to-use-git/branch-test.jpg" class="" title="分支 test 在合并分支后显示的提交记录">
+<img src="/2022/09/17/how-to-use-git/branch-test.jpg" class="" title="分支 test 在合并分支后显示的提交记录">
 <p><img src="how-to-use-git/branch-test.jpg" alt="分支 test 在合并分支后显示的提交记录"></p>
 <p>以上修改的具体 Git 命令和操作截图以及文件，可以查看 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/1">test/1</a>、<a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/2">test/2</a> 和 <a target="_blank" rel="noopener" href="https://github.com/Storh/git-example/tree/main/test/3">test/3</a> 这三个文件夹中的内容和信息。</p>
 <h2 id="关于-Git-的感悟"><a class="header-anchor" href="#关于-Git-的感悟">¶</a>关于 Git 的感悟</h2>
@@ -156,10 +156,90 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/09/13/how-to-use-git/" data-id="cl7ztg07x0000abox1cqthufr" data-title="如何使用 Git" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/09/17/how-to-use-git/" data-id="cl85rzeem0000e7othrf0b056" data-title="如何使用 Git" class="article-share-link">Teilen</a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-LeetCode-0004" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/17/LeetCode-0004/" class="article-date">
+  <time class="dt-published" datetime="2022-09-17T10:04:20.000Z" itemprop="datePublished">2022-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/09/17/LeetCode-0004/">LettCode 0004 题解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="从-How-Hard-Can-It-Be-到真的-Hard"><a class="header-anchor" href="#从-How-Hard-Can-It-Be-到真的-Hard">¶</a>从 How Hard Can It Be 到真的 Hard</h2>
+<p>首先，第四题 <a target="_blank" rel="noopener" href="https://leetcode.com/problems/median-of-two-sorted-arrays/">Median of Two Sorted Arrays</a> 是 LeetCode 的第一道 Hard 难度的题目，求两个有序数组的中位数。</p>
+<p>首先题目看到这里，相信大家的反应是 How Hard Can It Be，只要从最小的数字开始，数到中间就完事了，毕竟数组是有序的。但是真正的难点是下一个要求，时间复杂度为 O(log (m+n))。当加上这个限制条件的时候，相信很多刚开始刷题的朋友们都会感觉非常的突兀和不习惯，而想解决这个题目也就默认给了你一些前置条件，就是你至少要知道二分查找。</p>
+<h2 id="二分查找"><a class="header-anchor" href="#二分查找">¶</a>二分查找</h2>
+<p>为什么二分查找的时间复杂度是 O(logn)？假设一个有序的整数数组 A，数组 A 有 N 个元素，寻找数组 A 中有没有数字 j。对这个数组运用二分查找，同时假设数组 A 中没有数字 j。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 数组 A 中的内容</span><br><span class="line">[a, b, c, d, e, f, g, h, i, k, l, m, n, o, p, q]</span><br><span class="line"></span><br><span class="line">// 进行第一次二分，因为元素 h 小于 j，元素 j 可能在从 元素 i 到 r 的区间中</span><br><span class="line">[a, b, c, d, e, f, g, h] [i, k, l, m, n, o, p, q, r]</span><br><span class="line"></span><br><span class="line">// 对从 i 开始 到 r 结束的这段数组再次进行二分查找，j 可能在 i 到 n这个区间中</span><br><span class="line">[a, b, c, d, e, f, g, h] [i, k, l, n] [m, o, p, q]</span><br><span class="line"></span><br><span class="line">// 对区间进行二分查找，元素 j 可能在区间 i 到 k 之间</span><br><span class="line">[a, b, c, d, e, f, g, h] [i, k] [l, n] [m, o, p, q]</span><br><span class="line"></span><br><span class="line">// 对 i 到 k 的区间进行二分</span><br><span class="line">[a, b, c, d, e, f, g, h] [i] [k] [l, n] [m, o, p, q]</span><br><span class="line"></span><br><span class="line">// 此时发现二分后两个区间中都只有一个元素，且都不为数字 j，得出结论，数组 A 中不存在数字 j</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>通过上面演示的二分查找的过程可以看出来，二分就是通过不断的将要查找的值可能存在的区间对半切开，直到只剩一个元素或者找到要查找的数字为止。我们假设每次进行查找最多进行 X 次二分比较行为，二分的过程回退到原始数组，可以发现从一个元素开始，通过若干次乘以二，数组的长度将会符合原始数组的长度。而这个乘以二的次数正好等于数组进行二分的次数 X。得到以下的式子：</p>
+<p>N = 2<sup>X</sup> =&gt; X = log<sub>2</sub>(N)</p>
+<p>这就是为什么二分查找的时间复杂度是 O(logn) 的一个简单推导。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">binarySearch</span> = (<span class="params">nums, i</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> m = nums.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = m - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">let</span> mid = <span class="title class_">Math</span>.<span class="title function_">floor</span>((left + right) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; i) left = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> right = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (nums[left] == i)</span><br><span class="line">        <span class="keyword">return</span> left + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上面是一个二分的例子，要注意的地方是，二分的结束条件和如何决定下一次二分的区间。这里可以看到，循环的结束条件是首位相遇，也就是区间中只有一个元素的情况，因为二分的特性，最后区间中的元素一定是逐步减少的，同时这个区间也是一直符合我们设置的判定条件，此时区间中唯一的元素就是我们要找的元素了。也可以在每次二分时判断中间选择的点是不是符合要查找的条件，这样当运气好的时候，可以一次就把元素挑选出来。</p>
+<h2 id="题目分析"><a class="header-anchor" href="#题目分析">¶</a>题目分析</h2>
+<p>既然是求两个数组的中位数，那么两个数组之间一定是有关联的，而从中位数所在的位置，一定是可以把两个数组所有的元素分为两块，分别是小于中位数的和大于中位数的，且两边的数量应该是刚好相等或左侧数字比右侧多一个。此时的中位数应该就是左侧最大数字和右侧最小数字的平均数或左侧最大的数字。</p>
+<p>当了解到中位数可以通过分割两个数组实现的话，我们就可以把问题提炼成，两个有序数组 A 和 B，将两个数组分割为左右元素个数相同或者左边多一个的情况，两侧元素满足左侧所有的元素小于右侧所有的元素的情况。因为元素的总数是确定的，我们只要确定数组 A 中的位置，就能推出数组 B 中元素的位置，所以这个问题又可以变成，在数组 A 中寻找一个元素，使得这个元素满足以下条件：通过该元素可以确定一个数组 B 中的元素，把两个数组分成左右两部分，这两部分中，左边的最大值小于右边的最小值。</p>
+<p>为什么二分查找可以用来解决这个问题呢？主要原因还是，二分是在一个有序的列表中查找符合某一个条件的元素，那么不论是和某个值相等，还是像这个题目一样，要求左边元素全都小于右边的元素，都是可以实现的。当然，在实际解体中，还要注意数值的取值范围，防止出现因为各种边界条件导致的错误。</p>
+<h2 id="题解"><a class="header-anchor" href="#题解">¶</a>题解</h2>
+<h3 id="采用二分解法"><a class="header-anchor" href="#采用二分解法">¶</a>采用二分解法</h3>
+<p>主要是利用二分查找的方式在较短的数组中寻找符合要求的分割位置，当满足要求时，返回中位数；不满足的时候，根据左侧应该小于右侧的原则，去确定答案在那个区间中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findMedianSortedArrays = <span class="keyword">function</span> (<span class="params">nums1, nums2</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 对元素最少的数组进行二分，减少计算</span></span><br><span class="line">    <span class="keyword">if</span> (nums1.<span class="property">length</span> &gt; nums2.<span class="property">length</span>) <span class="keyword">return</span> <span class="title function_">findMedianSortedArrays</span>(nums2, nums1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> m = nums1.<span class="property">length</span>, n = nums2.<span class="property">length</span>;</span><br><span class="line">    <span class="comment">// left 和 right 是要二分的数组的范围，第一个数组可以分割成 m + 1 种可能的情况。</span></span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = m;</span><br><span class="line">    <span class="comment">// midL 是左侧最大的数，midR是右侧最小的数</span></span><br><span class="line">    <span class="keyword">let</span> midL = <span class="number">0</span>, midR = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// left 和 right 相等是为了处理某一个数组为空的特殊情况</span></span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="comment">// i 指向的是二分后数组开始的元素，</span></span><br><span class="line">        <span class="keyword">let</span> i = <span class="title class_">Math</span>.<span class="title function_">floor</span>((right + left) / <span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 推导和化简如何计算另一个数组要选择的分割点，根据左侧元素和右侧相等或多一个的原则</span></span><br><span class="line">        <span class="comment">// let j = n - (Math.floor((m + n) / 2) - (m - i));</span></span><br><span class="line">        <span class="comment">// 2 + 3 - Math.floor((2 + 3) / 2) === 3 === Math.floor((2 + 3 + 1) / 2) === Math.cell((2 + 3) / 2)</span></span><br><span class="line">        <span class="keyword">let</span> j = <span class="title class_">Math</span>.<span class="title function_">ceil</span>((n + m) / <span class="number">2</span>) - i;</span><br><span class="line">        <span class="comment">// il 和 ir 是第一个数组的二分的数值，由于数组是有序的，那么 il 就是第一个数组左边最大的数，ir 就是右边最小的数。jl 和 jr 同理。</span></span><br><span class="line">        <span class="comment">// Infinity 和 -Infinity 分别是 JavaScript 里面的最大数和最小数，用来适配当二分位置旁边元素为空的时候的处理方法。</span></span><br><span class="line">        <span class="keyword">const</span> il = i === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums1[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> ir = i === m ? <span class="title class_">Infinity</span> : nums1[i];</span><br><span class="line">        <span class="keyword">const</span> jl = j === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums2[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> jr = j === n ? <span class="title class_">Infinity</span> : nums2[j];</span><br><span class="line">        midL = <span class="title class_">Math</span>.<span class="title function_">max</span>(il, jl);</span><br><span class="line">        midR = <span class="title class_">Math</span>.<span class="title function_">min</span>(ir, jr);</span><br><span class="line">        <span class="comment">// 根据二分查找，可以得到下面的解法</span></span><br><span class="line">        <span class="keyword">if</span> (midL &lt;= midR) &#123;</span><br><span class="line">            <span class="keyword">return</span> (m + n) % <span class="number">2</span> ? midL : (midL + midR) / <span class="number">2</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// jl 应该小于 ir，此时证明了 ir 过小，所以要找到数在右侧区间</span></span><br><span class="line">            <span class="keyword">if</span> (jl &gt; ir) &#123;</span><br><span class="line">                left = i + <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right = i - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="LeetCode-中文官方题解"><a class="header-anchor" href="#LeetCode-中文官方题解">¶</a>LeetCode 中文官方题解</h3>
+<p>上面的解法比较容易理解，就是非常明显的二分查找的方式，但是官方的题解，就有一点难度了。</p>
+<p>首先需要分析正确分割数组后的情况，当 i、j 作为两个数组的分界点在正确的位置的时候，分割点两边的数一定符合特定的状态：il &lt;= ir; il &lt;= jr; jl &lt;= jr; jl &lt;= ir。而且根据两个数组递增的特性，只有在正确分割数组时，才能符合上面的状态。也就是说，符合题解的 i 一定是符合条件 il &lt;= ir 的最大值，j 一定是符合条件 jl &lt;= ir 的最大值。</p>
+<p>详细解释：假设此时的 i 和 j 都是符合最终条件的值，那么当 i = i + 1 时，需要满足条件 ++il &lt;= --jr 才能成立,因为 ++il = ir 和 --jr = jl 条件可以转换成 ir &lt;= jl，这显然与分割点左边全部小于等于右边的条件相悖。所以一定没有比符合条件的 i 值更大的。对于条件 jl &lt;= ir 中的 j 是最小值，同理可以转换成 jr &lt;= il 也是相悖的。</p>
+<p>理清上面的思路后，就可以进行解题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> findMedianSortedArrays = <span class="keyword">function</span> (<span class="params">nums1, nums2</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1.<span class="property">length</span> &gt; nums2.<span class="property">length</span>) <span class="keyword">return</span> <span class="title function_">findMedianSortedArrays</span>(nums2, nums1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> m = nums1.<span class="property">length</span>, n = nums2.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = m;</span><br><span class="line">    <span class="keyword">let</span> midL = <span class="number">0</span>, midR = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> i = <span class="title class_">Math</span>.<span class="title function_">floor</span>((right + left) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> j = <span class="title class_">Math</span>.<span class="title function_">ceil</span>((n + m) / <span class="number">2</span>) - i;</span><br><span class="line">        <span class="keyword">const</span> il = i === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums1[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> ir = i === m ? <span class="title class_">Infinity</span> : nums1[i];</span><br><span class="line">        <span class="keyword">const</span> jl = j === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums2[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> jr = j === n ? <span class="title class_">Infinity</span> : nums2[j];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 此时的二分查找条件变成了寻找最大的满足 il &lt;= jr 条件的 i 的值，并且由于为了防止进入死循环，对 left 进行了强制右移</span></span><br><span class="line">        <span class="comment">// 所以需要将每个满足条件的两端的最值进行记录，这样即便由于 i 刚好在在过程中变成中值导致的无解的情况进行了规避</span></span><br><span class="line">        <span class="keyword">if</span> (il &lt;= jr) &#123;</span><br><span class="line">            midL = <span class="title class_">Math</span>.<span class="title function_">max</span>(il, jl);</span><br><span class="line">            midR = <span class="title class_">Math</span>.<span class="title function_">min</span>(ir, jr);</span><br><span class="line">            left = i + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// jl &lt;= ir 作为条件的题解</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (jl &lt;= ir) &#123;</span></span><br><span class="line">        <span class="comment">//     midL = Math.max(il, jl);</span></span><br><span class="line">        <span class="comment">//     midR = Math.min(ir, jr);</span></span><br><span class="line">        <span class="comment">//     right = i - 1;</span></span><br><span class="line">        <span class="comment">// &#125; else &#123;</span></span><br><span class="line">        <span class="comment">//     left = i + 1;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (m + n) % <span class="number">2</span> ? midL : (midL + midR) / <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="改进过的二分解法"><a class="header-anchor" href="#改进过的二分解法">¶</a>改进过的二分解法</h3>
+<p>不过上面的解题方式和逻辑多少有些绕弯，其实我们只要运用二分查找每次都一定可以排除一半的不符合要求的数组元素就可以了。当发生条件 jl &gt; ir 时，一定证明了此时 i 选的过小，那么正确的 i 一定在区间 [i + 1, right] 之间，对 left 进行修改就可以了。</p>
+<p>同理，当 il &gt; jr 发生时，一定是 i 选的过大了，此时就在区间 [left, i - 1] 之中，但是要注意的是，由于对中位数 i 的区间变化变成了 - 1 的情况，为了防止死循环和 i 出现负值的情况，此时计算中位数时应该使用 left + right + 1 的方式计算，或者直接使用 <code>Math.ceil()</code> 函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> findMedianSortedArrays = <span class="keyword">function</span> (<span class="params">nums1, nums2</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums1.<span class="property">length</span> &gt; nums2.<span class="property">length</span>) <span class="keyword">return</span> <span class="title function_">findMedianSortedArrays</span>(nums2, nums1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> m = nums1.<span class="property">length</span>, n = nums2.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = m;</span><br><span class="line">    <span class="keyword">let</span> midL = <span class="number">0</span>, midR = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">let</span> i = <span class="title class_">Math</span>.<span class="title function_">floor</span>((right + left) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">let</span> j = <span class="title class_">Math</span>.<span class="title function_">ceil</span>((n + m) / <span class="number">2</span>) - i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> il = i === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums1[i - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> ir = i === m ? <span class="title class_">Infinity</span> : nums1[i];</span><br><span class="line">        <span class="keyword">const</span> jl = j === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums2[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> jr = j === n ? <span class="title class_">Infinity</span> : nums2[j];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (jl &gt; ir) &#123;</span><br><span class="line">            left = i + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> i = left;</span><br><span class="line">    <span class="keyword">let</span> j = <span class="title class_">Math</span>.<span class="title function_">ceil</span>((n + m) / <span class="number">2</span>) - i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> il = i === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums1[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">const</span> ir = i === m ? <span class="title class_">Infinity</span> : nums1[i];</span><br><span class="line">    <span class="keyword">const</span> jl = j === <span class="number">0</span> ? -<span class="title class_">Infinity</span> : nums2[j - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">const</span> jr = j === n ? <span class="title class_">Infinity</span> : nums2[j];</span><br><span class="line">    midL = <span class="title class_">Math</span>.<span class="title function_">max</span>(il, jl);</span><br><span class="line">    midR = <span class="title class_">Math</span>.<span class="title function_">min</span>(ir, jr);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (m + n) % <span class="number">2</span> ? midL : (midL + midR) / <span class="number">2</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="感悟"><a class="header-anchor" href="#感悟">¶</a>感悟</h2>
+<p>在这个题目中，最大的感受是二分的用法扩展。二分不只是单纯的在一个数组中查找某个数或者字符串，而是通过尝试深刻的理解到了，只要有有序数组和分割条件，就能进行二分查找。</p>
+<h2 id="参考连接"><a class="header-anchor" href="#参考连接">¶</a>参考连接</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/median-of-two-sorted-arrays/">4. Median of Two Sorted Arrays</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/median-of-two-sorted-arrays/solution/xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-s-114/">寻找两个有序数组的中位数</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://storh.github.io/2022/09/17/LeetCode-0004/" data-id="cl85rzeer0001e7ot5tdhfhrw" data-title="LettCode 0004 题解" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LettCode/" rel="tag">LettCode</a></li></ul>
+
     </footer>
   </div>
   
@@ -231,7 +311,7 @@
 <p><a target="_blank" rel="noopener" href="http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D">Loupe</a></p>
 </li>
 </ul>
-<h2 id="参考连接"><a class="header-anchor" href="#参考连接">¶</a>参考连接</h2>
+<h2 id="参考连接-v2"><a class="header-anchor" href="#参考连接-v2">¶</a>参考连接</h2>
 <ol>
 <li>
 <p><a target="_blank" rel="noopener" href="https://promisesaplus.com/implementations#the-ecmascript-specification">The ECMAScript Specification</a></p>
@@ -262,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/09/13/js-async-03/" data-id="cl7ztg0880006aboxc1tceqsj" data-title="JavaScript 异步 03 - 增补" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/09/13/js-async-03/" data-id="cl85rzef00009e7ot5b54bsua" data-title="JavaScript 异步 03 - 增补" class="article-share-link">Teilen</a>
       
       
       
@@ -381,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/09/01/js-async-02/" data-id="cl7ztg0870005aboxff354g90" data-title="JavaScript 异步 02 - 微任务和 Web Workers" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/09/01/js-async-02/" data-id="cl85rzeey0006e7ot8ivxh7ck" data-title="JavaScript 异步 02 - 微任务和 Web Workers" class="article-share-link">Teilen</a>
       
       
       
@@ -484,7 +564,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl7ztg0860004abox48q999z8" data-title="JavaScript 异步 01 - 初识 JavaScript 异步" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/21/js-async-01/" data-id="cl85rzeex0005e7otgceihvi9" data-title="JavaScript 异步 01 - 初识 JavaScript 异步" class="article-share-link">Teilen</a>
       
       
       
@@ -555,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl7ztg0820001abox0ysvddul" data-title="Web Storage" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/08/11/Web-Storage/" data-id="cl85rzeet0002e7otdq49b7e9" data-title="Web Storage" class="article-share-link">Teilen</a>
       
       
       
@@ -638,7 +718,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl7ztg08a0009abox6io53uws" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/21/merge-branches/" data-id="cl85rzef1000ae7ot5vzyeycw" data-title="为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识" class="article-share-link">Teilen</a>
       
       
       
@@ -697,7 +777,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl7ztg0840002aboxawb5bivr" data-title="hello world" class="article-share-link">Teilen</a>
+      <a data-url="https://storh.github.io/2022/07/04/hello-world/" data-id="cl85rzeew0004e7ot8knk7ua3" data-title="hello world" class="article-share-link">Teilen</a>
       
       
       
@@ -722,7 +802,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/" rel="tag">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-Branching/" rel="tag">Git Branching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Front-end/" rel="tag">Front-end</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-Branching/" rel="tag">Git Branching</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LettCode/" rel="tag">LettCode</a></li></ul>
     </div>
   </div>
 
@@ -732,7 +812,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a>
+      <a href="/tags/Front-end/" style="font-size: 10px;">Front-end</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Git-Branching/" style="font-size: 10px;">Git Branching</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/LettCode/" style="font-size: 10px;">LettCode</a>
     </div>
   </div>
 
@@ -754,7 +834,11 @@
       <ul>
         
           <li>
-            <a href="/2022/09/13/how-to-use-git/">如何使用 Git</a>
+            <a href="/2022/09/17/how-to-use-git/">如何使用 Git</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/17/LeetCode-0004/">LettCode 0004 题解</a>
           </li>
         
           <li>
@@ -767,10 +851,6 @@
         
           <li>
             <a href="/2022/08/21/js-async-01/">JavaScript 异步 01 - 初识 JavaScript 异步</a>
-          </li>
-        
-          <li>
-            <a href="/2022/08/11/Web-Storage/">Web Storage</a>
           </li>
         
       </ul>
