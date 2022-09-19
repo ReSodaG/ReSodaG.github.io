@@ -1,7 +1,9 @@
 ---
-title: 如何使用 Git
+title: 如何使用 Git - 01
+date: 2022-09-19 16:12:05
 tags:
 ---
+
 
 关于如何使用 Git 我专门在一个[测试项目](https://github.com/Storh/git-example)中进行了尝试，并保持了提交记录提交在 GitHub 上，这个项目的内容就是用来描述 Git 的命令和操作。为了方便测试分支和协作，我一共准备了 3 个用户来对项目进行修改，分别是我本人、 Alice 和 Bob。
 
@@ -120,7 +122,7 @@ git branch -d test-2
 
 {% asset_img merge-branch-without-conflict.jpg 没有冲突的分支合并 %}
 
-![没有冲突的分支合并](how-to-use-git/merge-branch-without-conflict.jpg)
+![没有冲突的分支合并](how-to-use-git-01/merge-branch-without-conflict.jpg)
 
 可以看出来，这样操作产生了分支合并的 Git 记录。等于说在 Git 的操作下，产生了一个新的快照，test-1 和 test-2 的最后一次提交是这个快照的两个父级，而 test 这个分支指针指向了这个自动产生的提交上。
 
@@ -140,11 +142,15 @@ git branch -d test-2
 
 {% asset_img commit-merge.jpg test-2 分支合并到 test 分支上时显示的提交的文件 %}
 
-![test-2 分支合并到 test 分支上时显示的提交的文件](how-to-use-git/commit-merge.jpg)
+![test-2 分支合并到 test 分支上时显示的提交的文件](how-to-use-git-01/commit-merge.jpg)
 
 从上图可以看从，相同的文件 file 和 file copy 没有被加入到这次提交当中，而没有冲突的 file2 文件的来源哈希是在 test-2 最后编辑这个文件的哈希（以上描述请参考 [test/3](https://github.com/Storh/git-example/tree/main/test/3) 这次试验和[结论](https://github.com/Storh/git-example/tree/main/test/3/info.md)理解）。
 
-另外，在 vsc 上显示的提交顺序是优先按照祖先关系排序，然后根据提交的时间。如：按照时间顺序，先是对 test-1 分支进行了提交，然后和 test-2 分支交替提交一些内容，在快结束的时候，突然意识到应该提供一个双方修改相同的文件，于是在 test 分支上新增了文件后，利用 Git rebase 来将这次的提交作为两个分支的共同祖先结点，这样两个分支就仿佛从一开始就有了这个同样的文件。然后先快进到 test-1 分支，在合并 test-2 分支。但是最后显示的效果将会是这样：
+### 分支前后关系如何显示
+
+在 vsc 上显示的提交顺序是优先按照祖先关系排序，然后根据提交的时间。
+
+如：按照时间顺序，先是对 test-1 分支进行了提交，然后和 test-2 分支交替提交一些内容，在快结束的时候，突然意识到应该提供一个双方修改相同的文件，或者是在提交 1 处存在 bug 需要修复，于是在 test 分支上新增了文件后，利用 Git rebase 来将这次的提交作为两个分支的共同祖先结点，这样两个分支就仿佛从一开始就有了这个同样的文件。然后先快进到 test-1 分支，在合并 test-2 分支。但是最后显示的效果将会是这样：
 
 ```
      2-3---5--
@@ -154,11 +160,34 @@ git branch -d test-2
      ----4---6
 ```
 
-其中，7 就是利用 rebase 来添加到主分支上的提交内容，实际测试结果如下图：
+其中，test 分支一开始指向的是提交节点 1，test-1 分支的内容是 2、3、5 提交节点，4、6 为 test-2 提交结点，而提交 7 就是利用 rebase 来添加到主分支上的提交内容。
+
+这样我们也得到了一个使用 rebase 的方式来修改根节点 bug 的技巧。
+
+具体操作：
+
+```shell
+
+# 先移动到主分支上
+git checkout test
+
+# 进行修改和提交你要改动的内容，生成提交 7
+
+# 移动到 test-1 分支上，进行变基操作
+git checkout test-1
+git rebase test
+
+# test-2 进行同样的操作
+git checkout test-2
+git rebase test
+
+```
+
+实际测试结果如下图：
 
 {% asset_img branch-test.jpg 分支 test 在合并分支后显示的提交记录 %}
 
-![分支 test 在合并分支后显示的提交记录](how-to-use-git/branch-test.jpg)
+![分支 test 在合并分支后显示的提交记录](how-to-use-git-01/branch-test.jpg)
 
 以上修改的具体 Git 命令和操作截图以及文件，可以查看 [test/1](https://github.com/Storh/git-example/tree/main/test/1)、[test/2](https://github.com/Storh/git-example/tree/main/test/2) 和 [test/3](https://github.com/Storh/git-example/tree/main/test/3) 这三个文件夹中的内容和信息。
 
