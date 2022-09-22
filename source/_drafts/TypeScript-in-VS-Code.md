@@ -23,7 +23,7 @@ https://code.visualstudio.com/docs/editor/debugging
 
 在文件夹目录中新建你的 html 文件，然后在 script 元素中填写你的 JS 文件名。
 
-``` json
+```json
 {
   "name": "Launch index.html",
   "request": "launch",
@@ -37,6 +37,54 @@ https://code.visualstudio.com/docs/editor/debugging
 在这个配置中，有一些属性需要进行一些讲解。属性 name 是你给调试配置起的名字，request 决定了调试程序是如何运行的，两个属性分别为 launch 和 attach，“启动”和“附加”。这两个属性的选择，来自你的使用习惯。表现上来说，选择“启动”的话，VS Code 会以调试模式替你打开你的 Chrome 浏览器，并在地址栏输入你的 html 文件地址；而“附加”需要你自己去打开这个文件。启动模式下，VS Code 会以调试模式打开你的程序进程后，并自动将调试器连接到你的程序进程的调试端口上；而附加模式需要你根据运行代码的程序，手动配置好调试端口。
 
 ### 附加模式配置
+
+```json
+{
+    "name": "Attach index.html",
+    "request": "attach",
+    "type": "chrome",
+    "port": 9222
+},
+```
+
+附加调试需要将你的执行环境（浏览器）以调试模式的方式启动。以 Chrome 浏览器为例，这需要你在浏览器的安装目录中（一般为 C:\Program Files\Google\Chrome\Application）以调试模式打开新的浏览器实例，并配置一个端口用来和外部调试器连接，例如 chrome.exe --remote-debugging-port=9222 --user-data-dir=remote-debug-profile，这里建议你使用管理员模式打开命令行，以防止新建 remote-debug-profile 的配置目录失败。当新的浏览器实例启动后，就可以在 VS Code 中选择 Attach index.html 来附加到浏览器。此时你会发现，图下功能区域的最后一个图标从“停止”变成了“断开连接”表示当前已经实现了调试器对浏览器的连接，即便你还没有打开目的文件或地址。之后在这个新的浏览器实例中打开你的静态文件，就可以像上面启动模式一样进行调试了。
+
+{% asset_img debug-bar.jpg 调试栏 %}
+
+type 属性决定了你可以打开什么浏览器，这里除了填 chrome 以外，还可以填 msedge 来用 edge 浏览器进行调试。如果你安装了其他浏览器，也可以通过修改参数来打开，以下是两种打开 Chrome 开发者版的方法，一个是配置运行时的执行参数来控制浏览器的版本，另一种是直接设置参数为具体的程序地址，只要浏览器的调试接口设计能兼容你在 type 属性中填的值，就可以实现调试功能。
+
+```json
+{
+    "name": "Launch index.html (Chrome Dev)",
+    "request": "launch",
+    "type": "chrome",
+    "runtimeExecutable": "dev",
+    "file": "${workspaceFolder}/index.html"
+},
+{
+    "name": "Launch index.html (exe)",
+    "request": "launch",
+    "type": "chrome",
+    "runtimeExecutable": "C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe",
+    "file": "${workspaceFolder}/index.html"
+},
+```
+
+https://code.visualstudio.com/docs/nodejs/browser-debugging
+
+## 使用服务器运行网页
+
+上面是通过打开静态页面的方式进行调试的方法，而我们更经常遇到的一种情况是启动一个 WEB 服务来访问。在 VS Code 上可以通过安装 Live Server 插件来实现。此时只要把先前配置的 file 属性改为 url，并填上服务运行后本地可以访问的链接。
+
+```json
+{
+    "name": "Launch Chrome Dev (Server)",
+    "request": "launch",
+    "type": "chrome",
+    "runtimeExecutable": "dev",
+    "url": "http://localhost:5500",
+},
+```
 
 # 备注
 
@@ -54,4 +102,6 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In
 Node.js 运行时是负责安装 Web 服务代码及其依赖项并运行服务的软件栈。
 cloud.google.com/appengine/docs/standard/nodejs/runtime?hl=zh-cn
 
+```
 
+```
