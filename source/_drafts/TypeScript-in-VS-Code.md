@@ -86,6 +86,59 @@ https://code.visualstudio.com/docs/nodejs/browser-debugging
 },
 ```
 
+## 用 nodejs 调试
+
+### 启动调试
+
+首先需要先安装 nodejs 在你的电脑上，安装成功后，可以在命令行中输入node来检测安装是否成功。此时，即便你的目录中没有 launch.json进行配置，也可以通过直接点击“运行和调试”来进行调试（记得重启你的 VS Code）。或者也可以选择下图中的 nodejs 选项，然后在弹出条中选择运行当前文件来实现调试。
+
+{% asset_img debug-option.png 调试选项 %}
+
+如果实在要写一个配置的话，在配置文件中进行如下配置：
+
+``` json
+{
+    "name": "Launch Program (Node.js)",
+    "program": "${fileDirname}/index.js",
+    "request": "launch",
+    "skipFiles": [
+        "<node_internals>/**"
+    ],
+    "type": "node"
+},
+```
+
+这个例子有一个最大的问题，就是要根据你的文件名去修改 program属性中的文件名。这是就要利用配置的预定义变量来优化配置，例如使用${workspaceFolder}/${fileBasename}就可以获取当前文件名和后缀来进行调试，具体的变量列表可以参考文档中的Variables Reference页面来实现你的需求。
+
+https://code.visualstudio.com/docs/editor/variables-reference
+
+### 附加调试
+
+#### 自带的 JavaScript 调试终端
+
+在新建配置的时候，有一个选项是“JavaScript 调试终端”，点击后，你可以在下方功能栏看到打开了一个"JavaScript Debug Terminal" 在这个终端里，你只要运行你的 JS 代码，就可以实现调试的效果。例如，输入node index.js就可以调试终端目录下叫 index 的js 文件。这时我们会发现，调试条最后显示的是“断开连接”，这也就是表示了这个功能是使用附加模式来进行调试。
+
+{% asset_img js-debug-terminal.png JS 调试终端 %}
+
+使用 nodejs 附加的配置时，主要要配置的是nodejs程序的启动参数，node --inspect-brk index.js命令会以调试模式启动程序，并等待调试器连接，此时只要在 VS Code 上选择“Attach (Node.js)”来附加到 nodejs上即可。
+
+``` json
+{
+    "name": "Attach (Node.js)",
+    "port": 9229,
+    "request": "attach",
+    "skipFiles": [
+        "<node_internals>/**"
+    ],
+    "type": "node"
+},
+```
+
+https://nodejs.org/en
+
+code.visualstudio.com/docs/nodejs/nodejs-debugging
+如果你只是要运行 JS 代码，只要安装nodejs后，在 VS Code的商店中使用Code Runner扩展即可方便的运行 JS 代码。
+
 # 备注
 
 ## 运行时
