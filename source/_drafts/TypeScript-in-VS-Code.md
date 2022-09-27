@@ -123,69 +123,71 @@ tags:
 },
 ```
 
-## 用 nodejs 调试
+## 用 Node.js 调试
 
 ### 启动调试
 
-首先需要先安装 nodejs 在你的电脑上，安装成功后，可以在命令行中输入 node 来检测安装是否成功。此时，即便你的目录中没有 launch.json 进行配置，也可以通过直接点击“运行和调试”来进行调试（记得重启你的 VS Code）。或者也可以选择下图中的 nodejs 选项，然后在弹出条中选择运行当前文件来实现调试。
+首先需要先安装 Node.js^[3]^ 在你的电脑上，安装成功后，可以在命令行中输入`node`来检测安装是否成功。此时，即便你的目录中没有`launch.json`进行配置，也可以通过直接点击“运行和调试”来进行调试（记得重启你的 VS Code）。或者也可以选择下图中的 Node.js 选项，然后在弹出条中选择运行当前文件来实现调试。
 
 {% asset_img debug-option.png 调试选项 %}
 
-如果实在要写一个配置的话，在配置文件中进行如下配置：
+如果要写一个配置的话，在配置文件中进行如下配置：
 
 ```json
 {
-    "name": "Launch Program (Node.js)",
-    "program": "${fileDirname}/index.js",
-    "request": "launch",
-    "skipFiles": [
-        "<node_internals>/**"
-    ],
-    "type": "node"
+  "name": "Launch Program (Node.js)",
+  "program": "${fileDirname}/index.js",
+  "request": "launch",
+  "skipFiles": [
+      "<node_internals>/**"
+  ],
+  "type": "node"
 },
 ```
 
-这个例子有一个最大的问题，就是要根据你的文件名去修改 program 属性中的文件名。这是就要利用配置的预定义变量来优化配置，例如使用${workspaceFolder}/${fileBasename}就可以获取当前文件名和后缀来进行调试，具体的变量列表可以参考文档中的 Variables Reference 页面来实现你的需求。
-
-https://code.visualstudio.com/docs/editor/variables-reference
+这个例子有一个最大的问题，就是要根据你的文件名去修改`program`属性中的文件名。这是就要利用配置的预定义变量来优化配置，例如使用`${workspaceFolder}/${fileBasename}`就可以获取当前文件名和后缀来进行调试，具体的变量列表可以参考文档中的 Variables Reference^[4]^ 页面来实现你的需求。
 
 ### 附加调试
 
-#### 自带的 JavaScript 调试终端
+#### 使用自带的 JavaScript 调试终端
 
-在新建配置的时候，有一个选项是“JavaScript 调试终端”，点击后，你可以在下方功能栏看到打开了一个"JavaScript Debug Terminal" 在这个终端里，你只要运行你的 JS 代码，就可以实现调试的效果。例如，输入 node index.js 就可以调试终端目录下叫 index 的 js 文件。这时我们会发现，调试条最后显示的是“断开连接”，这也就是表示了这个功能是使用附加模式来进行调试。
+在新建配置的时候，有一个选项是“JavaScript 调试终端”，点击后，你可以在下方功能栏看到打开了一个`JavaScript Debug Terminal`在这个终端里，你只要运行你的 JS 代码，就可以实现调试的效果。例如，输入`node index.js`就可以调试终端目录下的`index.js`文件。这时我们会发现，调试条最后显示的是“断开连接”，这也就是表示了这个功能是使用附加模式来进行调试。
 
 {% asset_img js-debug-terminal.png JS 调试终端 %}
 
-使用 nodejs 附加的配置时，主要要配置的是 nodejs 程序的启动参数，node --inspect-brk index.js 命令会以调试模式启动程序，并等待调试器连接，此时只要在 VS Code 上选择“Attach (Node.js)”来附加到 nodejs 上即可。
+使用 Node.js 附加的配置时，主要要配置的是 Node.js 程序的启动参数，`node --inspect-brk index.js`^[5]^命令会以调试模式启动程序，并等待调试器连接，此时只要在 VS Code 上选择“Attach (Node.js)”来附加到 Node.js 上即可。
 
 ```json
 {
-    "name": "Attach (Node.js)",
-    "port": 9229,
-    "request": "attach",
-    "skipFiles": [
-        "<node_internals>/**"
-    ],
-    "type": "node"
+  "name": "Attach (Node.js)",
+  "port": 9229,
+  "request": "attach",
+  "skipFiles": [
+      "<node_internals>/**"
+  ],
+  "type": "node"
 },
 ```
 
-https://nodejs.org/en
+## 调试 TypeScript
 
-code.visualstudio.com/docs/nodejs/nodejs-debugging
+> 如果你只是要运行 JS 代码，只要安装 Node.js 后，在 VS Code 的商店中使用 Code Runner 扩展即可方便的运行 JS 代码。
 
-# 调试 TypeScript
+TypeScript 不像 JavaScript 可以直接在浏览器的终端中调试，甚至不能直接在 Node.js 环境中运行，需要利用 tsc 编译成 JS 文件，或者使用 ts-node 才行。利用 tsc 的`sourceMap`属性，可以编译出一个文件后缀为`.map`的中间文件，但是如果不配置的话，不会自动配置，需要你手动编译后才能进行调试。
 
-> 如果你只是要运行 JS 代码，只要安装 nodejs 后，在 VS Code 的商店中使用 Code Runner 扩展即可方便的运行 JS 代码。
+为了在 VS Code 上调试和运行 TypeScript 代码，你需要先安装对应的编译器。`npm install -g typescript`然后使用`tsc -v`来验证你的安装。对于你的 TypeScript 代码，通过命令`tsc filename.ts`即可将其编译为一个 JS 文件，然后就可以按照 JavaScript 的方式进行调试。
 
-TypeScript 不像 JavaScript 可以直接在浏览器的终端中调试，甚至不能直接在 nodejs 环境中运行，需要利用 tsc 编译成 js 或者使用 ts-node 才行。利用 tsc 的 sourceMap 属性，可以编译出一个文件后缀为.map 的中间文件，但是如果不配置的话，不会自动配置，需要你手动编译后再调试。
+这样编译文件会产生一个问题，你编译产生的 JS 文件会和`.ts`文件在同一个目录中，假设有同名文件的话会产生覆盖的问题，这里就要使用`tsc -init`来生成`tsconfig.json`文件对你的编译行为进行设置。我们只需要设置`"outDir": "debug"`并不携带任何参数的运行`tsc`命令，就可以把当前目录下所有的`.ts`文件进行编译，并将产生的`.js`文件按照相对目录输出到根目录下的`debug`文件夹中。
 
-为了在 VS Code 上调试和运行 TypeScript 代码，你需要先安装对应的编译器。npm install -g typescript 然后使用 tsc -v 来验证你的安装。对于你的 TypeScript 代码，通过命令 tsc filename.ts 即可将其编译为一个 JS 文件，然后就可以按照 JavaScript 的方式进行调试。这样编译文件会产生一个问题，你编译产生的 JS 文件会和.ts 文件在同一个目录中，假设有同名文件的话会产生覆盖的问题，这里就要使用 tsc -init 来生成 tsconfig.json 文件对你的编译行为进行设置。我们只需要设置"outDir": "debug"并不携带任何参数的运行 tsc 命令，就可以把当前目录下所有的 ts 文件进行编译，并将产生的 JS 文件按照相对目录输出到根目录下的 debug 文件夹中。但是这样依旧是在 JS 文件中调试，并没有实现我们在 TypeScript 中调试的目标。所以，我们可以使用 sourceMap 属性，来实现在 TypeScript 源代码和 正在运行的 JavaScript 代码直接进行映射。只需要在 tsconfig.json 文件中设置 "sourceMap": true，就可以在运行 tsc 命令编译时生成一个后缀为 .map 的文件来帮助调试器进行调试。此时完全兼容先前的 nodejs 启动配置，使用选项“Launch Program (Node.js)”就可以在 ts 文件中进行调试。
+但是这样依旧是在 JS 文件中调试，并没有实现我们在 TypeScript 中调试的目标。我们需要使用`sourceMap`^[7]^属性，来实现在 TypeScript 源代码和在 Node.js 中运行的 JavaScript 代码间进行映射。只需要在`tsconfig.json`文件中设置`"sourceMap": true`，就可以在运行`tsc`命令编译时,生成一个后缀为`.map`的文件来帮助调试器进行调试。此时完全兼容先前的 Node.js 启动配置，使用选项“Launch Program (Node.js)”就可以在`.ts`文件中进行调试。
 
-按照上面的操作，虽然可以实现调试的目标，但是使用起来相当的不便。不但需要运行编译的命令，一次还会生成多个文件，对于目前不需要重新编译的文件，需要进行多次重复操作。针对这些问题，我们可以使用 lauch.json 来自己设置一个配置，一步步的解决上面的问题。首先，我们要解决每次都要执行编译命令的问题。
+### 使用 VS Code 的任务功能
 
-虽然可以利用 VS Code 的构建功能（Ctrl+Shift+B）来自动监视 TypeScript 文件和生成 JS 文件，但是如果能把这个行为集成到启动配置中会更加方便。为了实现这个目标，我们需要先了解一下 VS Code 的任务功能，为了方便对多个工具进行自动化，我们可以为工具们配置任务，并在启动脚本中进行使用，任务的配置在.vscode 中的 tasks.json 文件中。你可以在使用构建功能的时候生成这个文件，使用 Ctrl+Shift+B 功能键，选项条中点击小齿轮，选择配置任务就可以自动生成和编辑这个配置文件。以 tsc 构建为例，我们来看一看任务的配置文件是怎么写的。
+按照上面的操作，虽然可以实现调试的目标，但是使用起来相当的不便。不但需要运行编译的命令，一次还会生成多个文件，对于目前不需要重新编译的文件，需要进行多次重复操作。针对这些问题，我们可以使用`lauch.json`来自己设置一个配置，一步步的解决上面的问题。首先，我们要解决每次都要执行编译命令的问题。
+
+虽然可以利用 VS Code 的构建功能`Ctrl+Shift+B`^[6]^来自动监视 TypeScript 文件和生成 JS 文件，但是如果能把这个行为集成到启动配置中会更加方便。为了实现这个目标，我们需要先了解一下 VS Code 的任务功能，为了方便对多个工具进行自动化。
+
+我们可以为项目配置任务，并在启动脚本中进行使用，任务的配置在`.vscode`中的`tasks.json`文件中。你可以在使用构建功能的时候生成这个文件，使用`Ctrl+Shift+B`功能键，然后在弹出的选项条中点击小齿轮，选择对应的配置任务就可以自动生成和编辑这个配置文件。以 tsc 构建任务为例，我们来看一看任务的配置文件是怎么写的。
 
 ```json
 "tasks": [
@@ -201,7 +203,7 @@ TypeScript 不像 JavaScript 可以直接在浏览器的终端中调试，甚至
 ]
 ```
 
-task 数组是你的任务配置列表，目前配置的内容是，一个名（标签）为 tsc: 构建 - tsconfig.json 的任务，通过配置和自动检测，它能够将你的 TypeScript 代码根据文件目录中的 tsconfig.json 配置自动编译为 JS 文件。现在我们可以通过按键触发任务，但是按照需要，这个任务如果可以自动执行或者在我们调试前先执行就更好了。在 launch.json 中有个属性是 preLaunchTask，可以配置在调试开始前要执行的任务，需要的参数是 task 的 label，就可以在调试开始前启动这个任务。
+task 数组是你的任务配置列表，目前配置的内容是，一个名（标签）为`tsc: 构建 - tsconfig.json`的任务，通过配置和自动检测，它能够将你的 TypeScript 代码根据文件目录中的`tsconfig.json`配置自动编译为 JS 文件。现在我们可以通过组合按键`Ctrl+Shift+B`触发任务，但是按照需要，这个任务如果可以自动执行或者在我们调试前先执行就更好了。在`launch.json`中有个属性是`preLaunchTask`^[8]^，可以配置在调试开始前要执行的任务，需要的参数是你这个任务的`label`属性，就可以在调试开始前启动这个任务。
 
 ```json
 {
@@ -217,7 +219,8 @@ task 数组是你的任务配置列表，目前配置的内容是，一个名（
 ```
 
 接下来就是实现从编译本目录下全部的 TypeScript 文件到只编译单个文件的操作。而这里就需要转到 task 中进行配置和修改。
-tsc 编译单个文件的时，可以手动将所有 tsconfig 中的参数写到命令行后，例如 tsc index.ts --sourceMap true --outDir debug 所以利用这个方式，我们可以使用任务的参数（args）属性来操作。要注意的是，默认的 TypeScript 配置并不能添加属性，所以需要切换为使用 shell 运行命令的方法。现在，你就可以调试单个 TypeScript 文件了。
+
+tsc 编译单个文件的时，可以手动将所有 tsconfig 中的参数写到命令行，例如`tsc index.ts --sourceMap true --outDir debug`。所以利用这个方式，我们可以使用任务`args`属性来操作。要注意的是，默认的 TypeScript 配置并不能添加属性，所以需要切换为使用 shell 运行命令的方法。现在，你就可以调试单个 TypeScript 文件了。
 
 ```json
 {
@@ -238,42 +241,35 @@ tsc 编译单个文件的时，可以手动将所有 tsconfig 中的参数写到
 },
 ```
 
-code.visualstudio.com/Docs/editor/tasks
-code.visualstudio.com/docs/typescript/typescript-tutorial
-code.visualstudio.com/docs/typescript/typescript-debugging
+## 备注
 
-# 备注
-
-## 运行时
+### 运行时
 
 在看文档的时候，经常会注意到文档中会提到一个叫做 runtime 的词，比如：
-"VS Code has built-in debugging support for the Node.js runtime and can debug JavaScript, TypeScript, or any other language that gets transpiled to JavaScript."
-"For debugging other languages and runtimes (including PHP, Ruby, Go, C#, Python, C++, PowerShell and many others), look for Debuggers extensions in the VS Code Marketplace or select Install Additional Debuggers in the top-level Run menu."
-code.visualstudio.com/docs/editor/debugging
-runtime 这个词一般被翻译成运行时。这有点像 run-time，但是实际上有一些区别。在之前谈 event loop 的文章里，我简单提到了一下这个概念，但是我感觉还是有必要再深入说说我的理解。
-我个人的理解是，runtime 是一组内容的概括，属于通过抽象得到的一个概念。它作为操作系统和代码之间的一个抽象层，代码执行时需要的东西，执行造成的影响都可以归到这个概念中去。为了防止混淆，我这里特地使用了“执行”这个词，而不使用“运行”。以代码执行开始和结束的时间为界限，期间涉及到的所以东西都可以算作运行时这一个概念所包括的内容。举例来说，执行代码的 JavaScript 引擎，无论是浏览器还是 nodejs 中对事件循环的具体实现，浏览器或 nodojs 所提供的 api；这些执行代码、去调用系统资源代码、控制事件的这些软件的集合，都是运行时包含的东西。
 
-在执行 JavaScript 代码的时候，JavaScript 运行时实际上维护了一组用于执行 JavaScript 代码的代理。每个代理由一组执行上下文的集合、执行上下文栈、主线程、一组可能创建用于执行 worker 的额外的线程集合、一个任务队列以及一个微任务队列构成。除了主线程（某些浏览器在多个代理之间共享的主线程）之外，其他组成部分对该代理都是唯一的。
-https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth
-Node.js 运行时是负责安装 Web 服务代码及其依赖项并运行服务的软件栈。
-cloud.google.com/appengine/docs/standard/nodejs/runtime?hl=zh-cn
+> "VS Code has built-in debugging support for the Node.js runtime and can debug JavaScript, TypeScript, or any other language that gets transpiled to JavaScript."
+> "For debugging other languages and runtimes (including PHP, Ruby, Go, C#, Python, C++, PowerShell and many others), look for Debuggers extensions in the VS Code Marketplace or select Install Additional Debuggers in the top-level Run menu."^[9]^
 
-## TypeScript 和 JavaScript 的特殊关系
+> Node.js 运行时是负责安装 Web 服务代码及其依赖项并运行服务的软件栈^[10]^。
 
-TypeScript is JavaScript’s runtime with a compile-time type checker.
-TypeScript 是带有编译时类型检查器的 JavaScript 运行时。
+runtime 这个词一般被翻译成运行时。这有点像 run-time，但是实际上有一些区别。在之前谈 [Event loops](storh.github.io/2022/08/21/js-async-01/) 的文章里，我简单提到了一下这个概念，但是我感觉还是有必要再深入说说我的理解。
 
-https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html
+我个人的理解是，runtime 是一组内容的概括，属于通过抽象得到的一个概念。它作为操作系统和代码之间的一个抽象层，代码执行时需要的东西，执行造成的影响都可以归到这个概念中去。为了防止混淆，我这里特地使用了“执行”这个词，而不使用“运行”。以代码执行开始和结束的时间为界限，期间涉及到的所以东西都可以算作运行时这一个概念所包括的内容。举例来说，执行代码的 JavaScript 引擎，无论是浏览器还是 Node.js 中对事件循环的具体实现，浏览器或 Nodo.js 所提供的 api；这些执行代码、去调用系统资源代码、控制事件的这些软件的集合，都是运行时包含的东西。
 
-TypeScript 能够运行在任何 JavaScript 可以运行的地方，是由于它们之间具有的特殊的关系。正如上面引用内容所说的，TypeScript 是一个 JavaScript 运行时，编译的过程可以理解为在类型检查通过后，剔除和类型相关的内容后，生成 JS 代码。基于这一特点，使用 TypeScript 需要安装 tsc 莱实现对代码的编译，而之后生成的 JS 代码就可以放到无论是浏览器还是 nodejs 中执行了。
+在执行 JavaScript 代码的时候，JavaScript 运行时实际上维护了一组用于执行 JavaScript 代码的代理。每个代理由一组执行上下文的集合、执行上下文栈、主线程、一组可能创建用于执行 worker 的额外的线程集合、一个任务队列以及一个微任务队列构成。除了主线程（某些浏览器在多个代理之间共享的主线程）之外，其他组成部分对该代理都是唯一的^[11]^。
 
-这句话也正好可以用来理解上面的关于运行时的概念。一般从直觉上来看，虽然 TypeScript 是 JavaScript 的一个超集，但是我们还是会把它们看作两个程序语言。但实际情况是，TypeScript 文件中的代码先由类型检查器的处理编译生成了 JS 代码，编译好的代码最终是在 nodejs 或者浏览器这样的 JavaScript 运行时中执行，TypeScript 这一单词的含义，就变成了将 .ts 文件中的代码转换为 JS 代码后，由 JavaScript 运行时来执行代码这一个组合概念。
+### TypeScript 和 JavaScript 的特殊关系
+
+> TypeScript is JavaScript’s runtime with a compile-time type checker.
+> TypeScript 是带有编译时类型检查器的 JavaScript 运行时^[12]^。
+
+TypeScript 能够运行在任何 JavaScript 可以运行的地方，是由于它们之间具有的特殊的关系。正如上面引用内容所说的，TypeScript 是一个 JavaScript 运行时，编译的过程可以理解为在类型检查通过后，剔除和类型相关的内容后，生成 JS 代码。基于这一特点，使用 TypeScript 需要安装 tsc 实现对代码的编译，而之后生成的 JS 代码就可以放到无论是浏览器还是 Node.js 中执行了。
+
+这句话也正好可以用来理解上面的关于运行时的概念。一般从直觉上来看，虽然 TypeScript 是 JavaScript 的一个超集，但是我们还是会把它们看作两个程序语言。但实际情况是，TypeScript 文件中的代码先由类型检查器的处理编译生成了 JS 代码，编译好的代码最终是在 Node.js 或者浏览器这样的 JavaScript 运行时中执行，TypeScript 这一单词的含义，就变成了将`.ts`文件中的代码转换为 JS 代码后，由 JavaScript 运行时来执行代码这一个组合概念。
 
 ### 关于 tsc 的更多
 
-当然，除了编译成 JavaScript，TypeScript 也是可以执行的（取决于对执行这一概念的理解）。Deno 就通过将 TypeScript 代码通过自己设计的转换工具处理后进行缓存，而不是把源代码转换为 JavaScript，利用这个缓存实现了运行 TypeScript 这一行为。
-
-https://deno.com/manual@v1.28.0/advanced/typescript/overview
+tsc 是 TypeScript 的编译器，基本的使用方法是通过命令`tsc file.ts`来把你的 TypeScript 代码 编译为 JS 代码^[13]^。当然，除了编译成 JavaScript，TypeScript 也是可以执行的（取决于对执行这一概念的理解）。Deno 就通过将 TypeScript 代码通过自己设计的转换工具处理后进行缓存，而不是把源代码转换为 JavaScript，利用这个缓存实现了运行 TypeScript 这一行为^[14]^。
 
 ## 参考链接
 
@@ -281,4 +277,26 @@ https://deno.com/manual@v1.28.0/advanced/typescript/overview
 
 2. [Browser debugging in VS Code](https://code.visualstudio.com/docs/nodejs/browser-debugging)
 
-. [TypeScript Tooling in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)
+3. [Node.js](https://nodejs.org/en)
+
+4. [Variables Reference](https://code.visualstudio.com/docs/editor/variables-reference)
+
+5. [Node.js debugging in VS Code](code.visualstudio.com/docs/nodejs/nodejs-debugging)
+
+6. [Integrate with External Tools via Tasks](https://code.visualstudio.com/Docs/editor/tasks)
+
+7. [TypeScript tutorial in Visual Studio Code - Debugging](https://code.visualstudio.com/docs/typescript/typescript-tutorial#_debugging)
+
+8. [Debugging TypeScript](https://code.visualstudio.com/docs/typescript/typescript-debugging)
+
+9. [Debugging - Debugger extensions](code.visualstudio.com/docs/editor/debugging#_debugger-extensions)
+
+10. [Node.js 运行时环境](https://cloud.google.com/appengine/docs/standard/nodejs/runtime?hl=zh-cn)
+
+11. [深入：微任务与 Javascript 运行时环境](developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth)
+
+12. [TypeScript for the New Programmer - Learning JavaScript and TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html#learning-javascript-and-typescript)
+
+13. [TypeScript Tooling in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)
+
+14. [Overview of TypeScript in Deno](deno.com/manual@v1.28.0/advanced/typescript/overview)
