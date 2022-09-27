@@ -2,6 +2,7 @@
 title: 在 Visual Studio Code 上搭建一个 TypeScript 开发环境
 tags:
   - TypeScript
+  - VS Code
 ---
 
 先放结论：
