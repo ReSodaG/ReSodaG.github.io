@@ -4,24 +4,63 @@ tags:
   - TypeScript
 ---
 
-> 由于 TypeScript 和 JavaScript 特殊的关系，谈 TypeScript 绕不开的是 JavaScript，一般来说，TypeScript 代码需要使用 tsc 编译为 JavaScript 代码才能运行。所以我们这里先搭建一个 JavaScript 的运行和调试环境，先利用一下 JavaScript 来熟悉一下 VS Code 的调试和配置方式，后面再针对 TypeScript 来进行设置和配置。
+先放结论：
 
-# 从 JavaScript 谈起
+首先需要安装 Node.js，然后使用命令`npm install -g typescript`全局安装 TypeScript，环境准备好后处理 VS Code 的配置。在项目的目录`.vscode`中新建文件`launch.json`，并新建启动配置如下：
 
-在 VS Code 的调试功能介绍中，提到了其有一个内置的调试器，可以对 JavaScript 进行调试。作为调试控制器，它的作用是用来调试代码的，并不能启动代码，你的 JavaScrip 代码必须要在一个运行时上执行，这个调试器才能连接到运行时上，完成在 VS Code 上调试的效果。而普遍的 JavaScript 运行环境，就是浏览器和 nodejs。对于 VS Code 的调试和启动的配置，是通过文件夹 .vscode 中的 launch.json 文件来设置的，虽然打开后有一些默认的配置项，但是如果默认配置项不能实现自己的目的的时候，还是建议自己新建文件去进行配置。
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch TypeScript Program After Build Task",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.ts",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "preLaunchTask": "tsc: 使用 args 构建单个文件 - tsconfig.json"
+    }
+  ]
+}
+```
 
-https://code.visualstudio.com/docs/editor/debugging
+在同目录下新建文件`tasks.json`进行任务配置，具体参数如下：
 
-## 浏览器调试
+```json
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "problemMatcher": ["$tsc"],
+      "command": "tsc",
+      "args": ["${file}", "--sourceMap", "true", "--outDir", "${workspaceFolder}\\debug\\${relativeFileDirname}\\"],
+      "group": "build",
+      "label": "tsc: 使用 args 构建单个文件 - tsconfig.json"
+    }
+  ]
+}
+```
 
-如果你只是要运行和调试 JS 代码，由于默认的调试器可以方便的和 nodejs 连接，只要你安装 nodejs 作为你的 JavaScript 运行时，你就可以方便的进行代码的执行和调试工作。不过我们这里先使用浏览器来配置一个开发环境。
-在浏览器上运行 JS 代码非常的简单，只要打开 DevTools 的 Console 就可以编写和运行 JS 代码。而对于一个网页的 JS 资源文件，可以通过在上面打断点来进行调试。
-对于 VS Code 的调试工具，只要告诉它你的浏览器和 url 地址，它就可以完成连接实现使用浏览器进行调试。所以我们现在的问题就转变为了，如何在浏览器中打开我们的网页。通过新建一个 html 文件并链接上自己本地的 .js 文件，就可以在浏览器中打开自己的网页；而在开发更常见的一种情况是，我们运行项目的集成框架，会打开一个服务使得我们的网页可以利用本地地址来访问。
+---
+
+## 从 JavaScript 谈起
+
+由于 TypeScript 和 JavaScript 之间特殊的关系，谈 TypeScript 绕不开的是 JavaScript。一般来说，TypeScript 代码需要使用 tsc 编译为 JavaScript 代码才能运行。所以我们这里先搭建一个 JavaScript 的运行和调试环境，利用 JavaScript 来熟悉一下 VS Code 的调试和配置方式，再对 TypeScript 来进行设置和配置。
+
+在 VS Code 的调试功能^[1]^介绍中，提到了其有一个内置的调试器，可以对 JavaScript 进行调试。作为调试控制器，它的作用是用来调试代码的，并不能启动代码，你的 JavaScrip 代码必须要在一个运行时上执行，这个调试器才能连接到运行时上，完成在 VS Code 上调试的效果。而普遍的 JavaScript 运行环境，就是浏览器和 nodejs。对于 VS Code 的调试和启动的配置，是通过文件夹`.vscode`中的`launch.json`文件来设置的，虽然打开后有一些默认的配置项，但是如果默认配置项不能实现自己的目的的时候，还是建议自己新建文件去进行配置。
+
+### 浏览器调试
+
+虽然从功能和方便程度来说，使用 Node.js 作为你的 JS 运行时是最为方便的，不过我们先不安装 Node.js，使用浏览器这个自带的运行时来配置一个开发环境。在浏览器上运行 JS 代码非常的容易，只要打开 DevTools 的 Console 就可以编写和运行 JS 代码。而对于一个网页的 JS 资源，可以在文件上面打断点来进行调试。
+
+对于 VS Code 的调试工具，只要告诉它你的浏览器和 url 地址，它就可以完成连接并使用浏览器进行调试。所以我们现在的问题就转变为，如何在浏览器中打开我们的网页。通过新建一个`html`文件并链接上自己本地的`.js`文件，就可以在浏览器中打开自己的网页；而在开发更常见的一种情况是，我们运行项目的集成框架，会打开一个服务使得我们的网页可以利用本地地址来访问。
+
 接下来我将根据这两种情况并结合配置的参数，来展示一下如何配置和执行。
 
 ### 打开单个文件
 
-在文件夹目录中新建你的 html 文件，然后在 script 元素中填写你的 JS 文件名。
+在文件夹目录中新建你的`html`文件，然后在`script`元素中填写你的 JS 文件名。具体内容我们这里就省略了，直接跳到如何进行启动配置。
 
 ```json
 {
@@ -32,57 +71,55 @@ https://code.visualstudio.com/docs/editor/debugging
 },
 ```
 
-按照如上配置，在选择该配置进行调试的时候，VS Code 会在你的 Chrome 浏览器中打开这个文件，而你的 JS 文件就能依靠浏览器这个环境来进行调试。但是有一个问题是，你对文件的修改，并不能触发浏览器的自动刷新，每次修改代码之后，你需要对网页进行刷新后才能看到修改后的效果。
+在`.vscode`中的`launch.json`文件中按照如上配置，在选择该配置进行调试的时候，VS Code 会在你的 Chrome 浏览器中打开这个文件，而你的 JS 文件就能依靠浏览器这个环境来进行调试。但是有一个问题是，你对文件的修改，并不能触发浏览器的自动刷新，每次修改代码之后，你需要对网页进行刷新后才能看到修改后的效果。
 
-在这个配置中，有一些属性需要进行一些讲解。属性 name 是你给调试配置起的名字，request 决定了调试程序是如何运行的，两个属性分别为 launch 和 attach，“启动”和“附加”。这两个属性的选择，来自你的使用习惯。表现上来说，选择“启动”的话，VS Code 会以调试模式替你打开你的 Chrome 浏览器，并在地址栏输入你的 html 文件地址；而“附加”需要你自己去打开这个文件。启动模式下，VS Code 会以调试模式打开你的程序进程后，并自动将调试器连接到你的程序进程的调试端口上；而附加模式需要你根据运行代码的程序，手动配置好调试端口。
+在这个配置中，有一些属性需要进行一些讲解。属性`name`是你给调试配置起的名字，`request`决定了调试程序是如何运行的，这个属性可以选择的两个值分别为`launch`和`attach`，即“启动”和“附加”。这两个属性的选择，来自你的使用习惯。从调试时程序的表现上来说，选择“启动”的话，VS Code 会以调试模式替你打开你的 Chrome 浏览器，并在地址栏输入你的`html`文件地址；而“附加”需要你自己去浏览器打开这个文件。启动模式下，VS Code 会以调试模式打开你的程序进程后，并自动将调试器连接到你的程序进程的调试端口上；而附加模式需要你根据运行代码的程序，手动配置好调试端口。
 
-### 附加模式配置
+附加模式配置：
 
 ```json
 {
-    "name": "Attach index.html",
-    "request": "attach",
-    "type": "chrome",
-    "port": 9222
+  "name": "Attach index.html",
+  "request": "attach",
+  "type": "chrome",
+  "port": 9222
 },
 ```
 
-附加调试需要将你的执行环境（浏览器）以调试模式的方式启动。以 Chrome 浏览器为例，这需要你在浏览器的安装目录中（一般为 C:\Program Files\Google\Chrome\Application）以调试模式打开新的浏览器实例，并配置一个端口用来和外部调试器连接，例如 chrome.exe --remote-debugging-port=9222 --user-data-dir=remote-debug-profile，这里建议你使用管理员模式打开命令行，以防止新建 remote-debug-profile 的配置目录失败。当新的浏览器实例启动后，就可以在 VS Code 中选择 Attach index.html 来附加到浏览器。此时你会发现，图下功能区域的最后一个图标从“停止”变成了“断开连接”表示当前已经实现了调试器对浏览器的连接，即便你还没有打开目的文件或地址。之后在这个新的浏览器实例中打开你的静态文件，就可以像上面启动模式一样进行调试了。
+附加调试需要将你的执行环境（浏览器）以调试模式的方式启动。以 Chrome 浏览器为例，这需要你在浏览器的安装目录中（一般为`C:\Program Files\Google\Chrome\Application`）以调试模式打开新的浏览器实例，并配置一个端口用来和外部调试器连接，例如`chrome.exe --remote-debugging-port=9222 --user-data-dir=remote-debug-profile`^[2]^，这里建议你使用管理员模式打开命令行，以防止在浏览器进程文件夹中新建`remote-debug-profile`的配置目录失败。当新的浏览器实例启动后，就可以在 VS Code 中选择`Attach index.html`来附加到浏览器。此时你会发现，图下功能区域的最后一个图标从“停止”变成了“断开连接”，表示当前已经实现了调试器对浏览器的连接，即便你还没有打开目的文件或地址。之后在这个新的浏览器实例中打开你的静态文件，就可以像上面启动模式一样进行调试了。
 
 {% asset_img debug-bar.jpg 调试栏 %}
 
-type 属性决定了你可以打开什么浏览器，这里除了填 chrome 以外，还可以填 msedge 来用 edge 浏览器进行调试。如果你安装了其他浏览器，也可以通过修改参数来打开，以下是两种打开 Chrome 开发者版的方法，一个是配置运行时的执行参数来控制浏览器的版本，另一种是直接设置参数为具体的程序地址，只要浏览器的调试接口设计能兼容你在 type 属性中填的值，就可以实现调试功能。
+`type`属性决定了你可以打开什么浏览器，这里除了填`chrome`以外，还可以填`msedge`来用 Edge 浏览器进行调试。如果你安装了其他浏览器，也可以通过修改参数来打开，以下是两种打开 Chrome 开发者版的方法，一个是配置运行时的执行参数来控制浏览器的版本，另一种是直接设置参数为具体的程序地址，只要浏览器的调试接口设计能兼容你在`type`属性中填的值，就可以实现调试功能。
 
 ```json
 {
-    "name": "Launch index.html (Chrome Dev)",
-    "request": "launch",
-    "type": "chrome",
-    "runtimeExecutable": "dev",
-    "file": "${workspaceFolder}/index.html"
+  "name": "Launch index.html (Chrome Dev)",
+  "request": "launch",
+  "type": "chrome",
+  "runtimeExecutable": "dev",
+  "file": "${workspaceFolder}/index.html"
 },
 {
-    "name": "Launch index.html (exe)",
-    "request": "launch",
-    "type": "chrome",
-    "runtimeExecutable": "C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe",
-    "file": "${workspaceFolder}/index.html"
+  "name": "Launch index.html (exe)",
+  "request": "launch",
+  "type": "chrome",
+  "runtimeExecutable": "C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe",
+  "file": "${workspaceFolder}/index.html"
 },
 ```
 
-https://code.visualstudio.com/docs/nodejs/browser-debugging
+### 使用服务器运行网页
 
-## 使用服务器运行网页
+上面是通过打开静态页面的方式进行调试的方法，而我们更经常遇到的一种情况是启动一个 WEB 服务来访问。在 VS Code 上可以通过安装 Live Server 插件来实现。此时只要把先前配置的`file`属性改为`url`，并填上服务运行后本地可以访问的链接。
 
-上面是通过打开静态页面的方式进行调试的方法，而我们更经常遇到的一种情况是启动一个 WEB 服务来访问。在 VS Code 上可以通过安装 Live Server 插件来实现。此时只要把先前配置的 file 属性改为 url，并填上服务运行后本地可以访问的链接。
-
-```json
+```JSON
 {
-    "name": "Launch Chrome Dev (Server)",
-    "request": "launch",
-    "type": "chrome",
-    "runtimeExecutable": "dev",
-    "url": "http://localhost:5500",
+  "name": "Launch Chrome Dev (Server)",
+  "request": "launch",
+  "type": "chrome",
+  "runtimeExecutable": "dev",
+  "url": "http://localhost:5500",
 },
 ```
 
@@ -232,10 +269,16 @@ TypeScript 能够运行在任何 JavaScript 可以运行的地方，是由于它
 
 这句话也正好可以用来理解上面的关于运行时的概念。一般从直觉上来看，虽然 TypeScript 是 JavaScript 的一个超集，但是我们还是会把它们看作两个程序语言。但实际情况是，TypeScript 文件中的代码先由类型检查器的处理编译生成了 JS 代码，编译好的代码最终是在 nodejs 或者浏览器这样的 JavaScript 运行时中执行，TypeScript 这一单词的含义，就变成了将 .ts 文件中的代码转换为 JS 代码后，由 JavaScript 运行时来执行代码这一个组合概念。
 
-## tsc 的来源
-
-typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html
+### 关于 tsc 的更多
 
 当然，除了编译成 JavaScript，TypeScript 也是可以执行的（取决于对执行这一概念的理解）。Deno 就通过将 TypeScript 代码通过自己设计的转换工具处理后进行缓存，而不是把源代码转换为 JavaScript，利用这个缓存实现了运行 TypeScript 这一行为。
 
 https://deno.com/manual@v1.28.0/advanced/typescript/overview
+
+## 参考链接
+
+1. [Debugging](https://code.visualstudio.com/docs/editor/debugging)
+
+2. [Browser debugging in VS Code](https://code.visualstudio.com/docs/nodejs/browser-debugging)
+
+. [TypeScript Tooling in 5 minutes](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html)
