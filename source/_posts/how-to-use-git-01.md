@@ -1,8 +1,10 @@
 ---
 title: 如何使用 Git - 01
-date: 2022-09-19 16:12:05
+categories:
+  - [工具, Git]
 tags:
   - Git
+date: 2022-09-19 16:12:05
 ---
 
 关于如何使用 Git 我专门在一个[测试项目](https://github.com/Storh/git-example)中进行了尝试，并保持了提交记录提交在 GitHub 上，这个项目的内容就是用来描述 Git 的命令和操作。为了方便测试分支和协作，我一共准备了 3 个用户来对项目进行修改，分别是我本人、 Alice 和 Bob。

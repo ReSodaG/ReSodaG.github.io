@@ -1,7 +1,8 @@
 ---
 title: hello world
+categories:
+  - [工具, Hexo]
 date: 2022-07-04 14:32:19
-tags:
 ---
 
 ## 简介

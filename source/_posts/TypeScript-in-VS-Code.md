@@ -1,5 +1,7 @@
 ---
 title: 在 Visual Studio Code 上搭建一个 TypeScript 开发环境
+categories:
+  - [前端, TypeScript]
 tags:
   - TypeScript
   - VS Code

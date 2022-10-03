@@ -1,5 +1,7 @@
 ---
 title: 为什么我的 commit 记录上总是一堆分支合并 -- Git 分支小知识
+categories:
+  - [工具, Git]
 tags:
   - Git
   - Git Branching

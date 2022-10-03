@@ -1,5 +1,7 @@
 ---
 title: Web Storage
+categories:
+  - [前端, Web API]
 tags:
   - Front-end
 date: 2022-08-11 09:55:45
