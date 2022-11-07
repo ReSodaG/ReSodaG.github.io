@@ -1,8 +1,10 @@
 ---
 title: JavaScript 异步 03 - 增补
-date: 2022-09-13 14:11:43
+categories:
+  - [前端, JavaScript]
 tags:
   - JavaScript
+date: 2022-09-13 14:11:43
 ---
 
 ## 好生生的为什么看起来了标准
@@ -29,7 +31,7 @@ Promises/A+ 是 Promise 的一个最小规范，按照 Promises/A+ 自己的描�
 
 ### ES5 时期
 
-因为浏览器除了要有 JavaScript 的引擎外，还有对 DOM 的渲染等内容，所以浏览器作为 HTML 规范中的用户代理的一员 ^[2]^，HTML 规范对浏览器如何实现 ECMA-262 的影响是必然的。和 ECMA-626 不一样，HTML 只保存和发表当前的单一规范版本 ^[3]^，现在的 HTML 标准并不会像之前的 HTML 标准一样有版本号，而将会是一个不断改进的标准，并且覆盖并淘汰了过去所有的 HTML 版本。而我们日常所说的 HTML5 实际上应该指代的并不是某一个固定的 HTML 版本，而是指代现代 Web 技术  ^[4]^。所以要确定当年的 HTML 标准内容，还是需要去查看当时的版本。
+因为浏览器除了要有 JavaScript 的引擎外，还有对 DOM 的渲染等内容，所以浏览器作为 HTML 规范中的用户代理的一员 ^[2]^，HTML 规范对浏览器如何实现 ECMA-262 的影响是必然的。和 ECMA-626 不一样，HTML 只保存和发表当前的单一规范版本 ^[3]^，现在的 HTML 标准并不会像之前的 HTML 标准一样有版本号，而将会是一个不断改进的标准，并且覆盖并淘汰了过去所有的 HTML 版本。而我们日常所说的 HTML5 实际上应该指代的并不是某一个固定的 HTML 版本，而是指代现代 Web 技术 ^[4]^。所以要确定当年的 HTML 标准内容，还是需要去查看当时的版本。
 
 在 2017 年的 HTML 标准中的第 8.1.3.7 章 [Integration with the JavaScript job queue](https://web.archive.org/web/20170228232624/https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-job-queue) 中，提到了因为 ECMA-262 中的具体设计并不完善，所以要求用户代理（例如浏览器）遵从他设计的规范去实现 JavaScript 中的 promise job 的操作，从而保证可以把这些设计整合到事件循环中。
 
@@ -41,7 +43,7 @@ Promises/A+ 是 Promise 的一个最小规范，按照 Promises/A+ 自己的描�
 
 我在研究这个的过程中，看到了一些写的不错的博客，也分享一下。
 
-* [How JavaScript works: an overview of the engine, the runtime, and the call stack](https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf)
+- [How JavaScript works: an overview of the engine, the runtime, and the call stack](https://blog.sessionstack.com/how-does-javascript-actually-work-part-1-b0bacc073cf)
 
 * [How JavaScript works: inside the V8 engine + 5 tips on how to write optimized code](https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e)
 
@@ -59,7 +61,7 @@ Promises/A+ 是 Promise 的一个最小规范，按照 Promises/A+ 自己的描�
 
 1. [The ECMAScript Specification](https://promisesaplus.com/implementations#the-ecmascript-specification)
 
-2. [HTML user agents (e.g., web browsers)](https://html.spec.whatwg.org/multipage/introduction.html#abstract:~:text=HTML%20user%20agents%20(e.g.%2C%20web%20browsers))
+2. [HTML user agents (e.g., web browsers)](<https://html.spec.whatwg.org/multipage/introduction.html#abstract:~:text=HTML%20user%20agents%20(e.g.%2C%20web%20browsers)>)
 
 3. [W3C HTML](https://www.w3.org/html/)
 
