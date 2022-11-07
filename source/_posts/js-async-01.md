@@ -1,10 +1,11 @@
 ---
 title: JavaScript 异步 01 - 初识 JavaScript 异步
+categories:
+  - [前端, JavaScript]
 tags:
   - JavaScript
 date: 2022-08-21 21:31:57
 ---
-
 
 ## 名词解释
 
