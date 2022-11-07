@@ -2,7 +2,7 @@
 title: LettCode 0004 题解
 date: 2022-09-17 18:04:20
 tags:
-  - LettCode
+  - LeetCode
 ---
 
 ## 从 How Hard Can It Be 到真的 Hard
