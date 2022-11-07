@@ -1,5 +1,5 @@
 ---
-title: LettCode 0004 题解
+title: LeetCode 0004 题解
 date: 2022-09-17 18:04:20
 tags:
   - LeetCode
