@@ -3,12 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Storh的打字台
+title: Storh 的打字台
 subtitle: ''
 description: ''
 keywords:
 author: Storh
-language: zh-cn
+# language: zh-cn
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -97,7 +98,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -113,14 +114,14 @@ markdown:
     typographer: true
     quotes: '“”‘’'
   plugins:
-    - markdown-it-abbr
-    - markdown-it-footnote
-    - markdown-it-ins
+    # - markdown-it-abbr
+    # - markdown-it-footnote
+    # - markdown-it-ins
     - markdown-it-sub
     - markdown-it-sup
-  anchors:
-    level: 2
-    collisionSuffix: 'v'
-    permalink: true
-    permalinkClass: header-anchor
-    permalinkSymbol: ¶
+  # anchors:
+  #   level: 2
+  #   collisionSuffix: 'v'
+    # permalink: true
+    # permalinkClass: header-anchor
+    # permalinkSymbol: ¶
