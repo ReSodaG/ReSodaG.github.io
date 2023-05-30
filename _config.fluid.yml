@@ -238,7 +238,7 @@ custom_js:
 custom_css:
 
 # 自定义 <head> 节点中的 HTML 内容
-custom_head: '<meta name="google-site-verification" content="FY1epgJr9qsRLvmQttCurU_ATIiKZx0pekfHTEQ6Bhs" />'
+custom_head: '<meta name="google-site-verification" content="FY1epgJr9qsRLvmQttCurU_ATIiKZx0pekfHTEQ6Bhs" /><meta name="msvalidate.01" content="2057F3BED3712F32A0B8E1DC64296407" />'
 
 # 设置 sitemap
 sitemap:
